@@ -18,6 +18,7 @@
 <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.default.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docx@9.1.1/dist/index.iife.js"></script>
 <style>
 /* ============================================================
    v14 — DESIGN SYSTEM "Calm Productivity"
@@ -2002,6 +2003,8 @@ tbody tr:hover { background: var(--bg-subtle); }
           <button class="nav-item active" data-tooltip="Accueil" onclick="navigateTo('dashboard')"><span class="nav-icon" data-icon="home" data-icon-size="16"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span> Accueil</button>
           <button class="nav-item" data-tooltip="Tous les liens" onclick="navigateTo('links')"><span class="nav-icon" data-icon="link" data-icon-size="16"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span> Tous les liens</button>
           <button class="nav-item" data-tooltip="Organisator" onclick="navigateTo('organisator')"><span class="nav-icon" data-icon="calendar" data-icon-size="16"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></span> Organisator</button>
+          <button class="nav-item" data-tooltip="Journal de bord" onclick="navigateTo('journal')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></span> Journal</button>
+          <button class="nav-item" data-tooltip="Notifications" onclick="navigateTo('notifcenter')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span> Alertes <span id="notif-badge" style="background:var(--danger);color:#fff;font-size:10px;padding:1px 6px;border-radius:99px;margin-left:auto;display:none;">0</span></button>
           <button class="nav-item" data-tooltip="Communicator" onclick="navigateTo('communicator')"><span class="nav-icon" data-icon="mail" data-icon-size="16"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span> Communicator</button>
         </div>
       </div>
@@ -3044,9 +3047,13 @@ tbody tr:hover { background: var(--bg-subtle); }
                                     <select id="suivi-hist-client" onchange="renderSuiviHistory()" class="rounded-lg px-3 py-1.5 text-xs outline-none" style="background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-primary);">
                                         <option value="">Tous les clients</option>
                                     </select>
-                                    <button onclick="exportSuiviToExcel()" class="btn-ghost text-[10px] px-3 py-1.5 flex items-center gap-1.5" style="color: #8ed4b0; border-color: rgba(102,187,147,0.3);">
-                                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                                        Excel
+                                    <button onclick="exportSuiviToWord()" class="btn-ghost text-[10px] px-3 py-1.5 flex items-center gap-1.5" style="color: #6B9BF4; border-color: rgba(107,155,244,0.3);">
+                                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                        Word
+                                    </button>
+                                    <button onclick="resyncSuiviFromCRA()" class="btn-ghost text-[10px] px-3 py-1.5 flex items-center gap-1.5" style="color: #F59E0B; border-color: rgba(245,158,11,0.3);" title="Resynchroniser les clients depuis le CRAminator">
+                                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                                        Resync CRA
                                     </button>
                                 </div>
                             </div>
@@ -4434,6 +4441,30 @@ function deleteCat(id) { if (confirm('Supprimer cette catégorie ?')) { catsData
             fileName += '_' + new Date().toISOString().split('T')[0] + '.xlsx';
             XLSX.writeFile(wb, fileName);
         }
+
+        // ===== RESYNC SUIVI DEPUIS CRAMINATOR =====
+        function resyncSuiviFromCRA() {
+            if (!rawData || rawData.length === 0) {
+                showCustomAlert('Info', 'Le CRAminator ne contient pas de données. Importez d\'abord vos fichiers dans le CRAminator.');
+                return;
+            }
+            // Re-populate clients from CRAminator rawData
+            const clients = [...new Set(rawData.map(d => d.client))].sort();
+            const clientSelect = document.getElementById('suivi-client');
+            const histSelect = document.getElementById('suivi-hist-client');
+            if (clientSelect) {
+                const curVal = clientSelect.value;
+                clientSelect.innerHTML = '<option value="">— Sélectionner un client —</option>' + clients.map(c => `<option value="${c}" ${c === curVal ? 'selected' : ''}>${c}</option>`).join('');
+            }
+            if (histSelect) {
+                const histVal = histSelect.value;
+                histSelect.innerHTML = '<option value="">Tous les clients</option>' + clients.map(c => `<option value="${c}" ${c === histVal ? 'selected' : ''}>${c}</option>`).join('');
+            }
+            renderSuiviHistory();
+            if (typeof toastOk === 'function') toastOk('🔄 ' + clients.length + ' client(s) resynchronisé(s) depuis le CRAminator');
+            if (typeof AuditLog !== 'undefined') AuditLog.log('suivi_resync', clients.length + ' clients');
+        }
+        window.resyncSuiviFromCRA = resyncSuiviFromCRA;
 
         // ===== DEMANDES & SATISFACTION =====
         let demandesData = SafeStorage.get('cra_demandes') || [];
@@ -5854,7 +5885,7 @@ function clearAllData() {
             
             // 2. Si on est sur l'onglet Suivi Hebdo
             if (!document.getElementById('suivi-content').classList.contains('hidden')) {
-                return exportSuiviToExcel();
+                return exportSuiviToWord();
             }
 
             // 3. Si on est sur l'onglet Demandes
@@ -6187,9 +6218,64 @@ let factStatuts = SafeStorage.get('fact_statuts') || {}; // {client_mission_mois
 let factTjm = SafeStorage.get('fact_tjm') || {};
 let factCurrentClient = null;
 
+// NOUVEAU : Données des échéances (Forfait)
+let factEcheances = SafeStorage.get('fact_echeances') || [];
+
+function factSaveEcheance(client, mission, moisAnnee, montant, description) {
+    if (!mission || !moisAnnee || !montant) {
+        toastWarn("Veuillez remplir la mission, le mois et le montant.");
+        return;
+    }
+    factEcheances.push({
+        id: 'ech_' + Date.now(),
+        client: client,
+        mission: mission,
+        moisAnnee: moisAnnee, // Format attendu: MM/YYYY
+        montant: parseFloat(montant),
+        description: description,
+        pascal: false, sent: false, paid: false
+    });
+    SafeStorage.set('fact_echeances', factEcheances);
+    factUpdateAll();
+    toastOk("Échéance ajoutée");
+}
+
+function factDeleteEcheance(id) {
+    if (!confirm("Supprimer cette échéance ?")) return;
+    factEcheances = factEcheances.filter(e => e.id !== id);
+    SafeStorage.set('fact_echeances', factEcheances);
+    factUpdateAll();
+}
+
+function factSetEcheanceStatut(id, field, val) {
+    const e = factEcheances.find(x => x.id === id);
+    if (!e) return;
+    e[field] = val;
+    // Logique de cascade des statuts
+    if (field === 'paid' && val) { e.sent = true; e.pascal = true; }
+    if (field === 'sent' && val) { e.pascal = true; }
+    if (field === 'pascal' && !val) { e.sent = false; e.paid = false; }
+    if (field === 'sent' && !val) { e.paid = false; }
+    SafeStorage.set('fact_echeances', factEcheances);
+    factUpdateKPIs();
+    factRenderTable();
+    if (factCurrentClient) factRenderClientDetail(factCurrentClient);
+}
+
+// Fonction utilitaire pour filtrer les échéances selon les filtres globaux
+function factGetFilteredEcheances() {
+    const fAn = document.getElementById('fact-filter-annee')?.value || '';
+    const fMo = document.getElementById('fact-filter-mois')?.value || '';
+    return factEcheances.filter(e => {
+        const echAnnee = e.moisAnnee.split('/')[1];
+        if (fAn && echAnnee !== fAn) return false;
+        if (fMo && e.moisAnnee !== fMo) return false;
+        return true;
+    });
+}
+
 // Charts
 let factChartClient = null, factChartEnvelope = null, factChartEvolution = null, factChartFiche = null;
-
 const FACT_PALETTE = ['#1B3B5C','#5EB091','#2A517A','#4A9076','#D97706','#DC2626','#3B82F6','#7C3AED','#0891B2','#059669'];
 
 // --- Utilitaires ---
@@ -6204,7 +6290,6 @@ function factSetStatut(client, mission, moisAnnee, field, val) {
     const k = factGetStatutKey(client, mission, moisAnnee);
     if (!factStatuts[k]) factStatuts[k] = { pascal: false, sent: false, paid: false };
     factStatuts[k][field] = val;
-    // Cohérence: payée → envoyée → pascal forcément coché
     if (field === 'paid' && val) { factStatuts[k].sent = true; factStatuts[k].pascal = true; }
     if (field === 'sent' && val) { factStatuts[k].pascal = true; }
     if (field === 'pascal' && !val) { factStatuts[k].sent = false; factStatuts[k].paid = false; }
@@ -6225,7 +6310,7 @@ function factHandleFiles(e) {
             try {
                 const wb = XLSX.read(new Uint8Array(evt.target.result), { type: 'array' });
                 const json = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { defval: '' });
-                const parsed = parseDataArray(json, file.name); // réutilise le parser du CRAminator
+                const parsed = parseDataArray(json, file.name); 
                 if (parsed.length > 0) {
                     const id = 'fact_' + Date.now() + '_' + Math.random().toString(36).substr(2,5);
                     factDataSources[id] = { name: file.name.replace(/\.[^/.]+$/, ''), data: parsed, addedAt: Date.now() };
@@ -6240,14 +6325,12 @@ function factHandleFiles(e) {
 }
 
 function factLoadFromCRA() {
-    // Réutilise les données du CRAminator (rawData)
     if (!rawData || rawData.length === 0) {
         showCustomAlert('Info', 'Le CRAminator ne contient pas de données. Importez d\'abord dans le CRAminator ou utilisez l\'import direct.');
         return;
     }
     factDataSources['cra_shared'] = { name: 'CRAminator (partagé)', data: rawData, addedAt: Date.now(), shared: true };
     SafeStorage.set('fact_data_sources', factDataSources);
-    // Synchroniser les TJM depuis le CRAminator
     Object.keys(clientTjm).forEach(c => { if (!factTjm[c]) factTjm[c] = clientTjm[c]; });
     SafeStorage.set('fact_tjm', factTjm);
     factRebuildData();
@@ -6256,7 +6339,6 @@ function factLoadFromCRA() {
 function factRebuildData() {
     factData = [];
     Object.values(factDataSources).forEach(src => { if (src.data) factData = factData.concat(src.data); });
-    // Sync TJM depuis CRAminator
     Object.keys(clientTjm).forEach(c => { if (factTjm[c] === undefined) factTjm[c] = clientTjm[c]; });
     factRenderSourceChips();
     if (factData.length > 0) {
@@ -6271,8 +6353,7 @@ function factRebuildData() {
         factUpdateKPIs();
         factRenderTable();
         factRenderClientList();
-		renderHomeGrid();
-        // Activer la page et dessiner les charts après rendu
+        if (typeof renderHomeGrid === 'function') renderHomeGrid();
         navigateTo('facturator');
         setTimeout(factDrawCharts, 80);
     }
@@ -6297,40 +6378,24 @@ function factRenderSourceChips() {
     }).join('');
 }
 
-function removeSource(id) {
-    if (!confirm(`Supprimer la source "${dataSources[id]?.name}" ?`)) return;
-    delete dataSources[id];
-    SafeStorage.set('cra_data_sources', dataSources);
-    rebuildRawData();
-    renderSourceChips();
-
-    // S'il ne reste plus aucun fichier CRA après suppression
-    if (Object.keys(dataSources).length === 0) {
-        document.getElementById('drop-zone').classList.remove('hidden');
-
-        if ((!demandesData || demandesData.length === 0) && (!suiviComments || suiviComments.length === 0)) {
-            document.getElementById('dashboard-section').classList.add('hidden');
-        } else {
-            if (demandesData && demandesData.length > 0) switchCraTab('demandes');
-            else switchCraTab('suivi');
-        }
-    } else {
-        populateFilters();
-        updateDashboard();
+function factRemoveSource(id) {
+    if (!confirm("Supprimer cette source du Facturator ?")) return;
+    delete factDataSources[id];
+    SafeStorage.set('fact_data_sources', factDataSources);
+    factRebuildData();
+    if (Object.keys(factDataSources).length === 0) {
+        document.getElementById('fact-dashboard')?.classList.add('hidden');
+        document.getElementById('fact-upload-section')?.classList.remove('hidden');
     }
 }
 
-function clearDemandesData() {
-    if (!confirm('Supprimer toutes les demandes importées ?')) return;
-    demandesData = [];
-    SafeStorage.remove('cra_demandes');
-    initDemandesTab();
-    
-    // Si on a plus rien du tout (ni CRA, ni Suivi, ni Demandes), on remet la zone de drop
-    if (Object.keys(dataSources).length === 0 && (!suiviComments || suiviComments.length === 0)) {
-        document.getElementById('dashboard-section').classList.add('hidden');
-        document.getElementById('drop-zone').classList.remove('hidden');
-    }
+function factClearData() {
+    if (!confirm('Supprimer toutes les données du Facturator ?')) return;
+    factDataSources = {};
+    SafeStorage.remove('fact_data_sources');
+    factRebuildData();
+    document.getElementById('fact-dashboard')?.classList.add('hidden');
+    document.getElementById('fact-upload-section')?.classList.remove('hidden');
 }
 
 // --- Filtres ---
@@ -6357,17 +6422,7 @@ function factPopulateFilters() {
     const clients = [...new Set(factData.map(d => d.client))].sort();
     if (selTblC) selTblC.innerHTML = '<option value="">Tous les clients</option>' + clients.map(c => `<option value="${c}">${c}</option>`).join('');
     if (selTblM) selTblM.innerHTML = '<option value="">Tous les mois</option>' + moisSet.map(m => `<option value="${m}">${m}</option>`).join('');
-
-    // Par défaut : Mois précédent
-    const now = new Date();
-    now.setMonth(now.getMonth() - 1);
-    const lastMonthStr = `${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
-
-    if (!selMo.value && moisSet.includes(lastMonthStr)) {
-        selMo.value = lastMonthStr;
-    }
 }
-
 
 function factGetFiltered() {
     const fAn = document.getElementById('fact-filter-annee')?.value || '';
@@ -6401,7 +6456,6 @@ function factUpdateAll() {
     factRenderTable();
     factRenderClientList();
     if (factCurrentClient) factRenderClientDetail(factCurrentClient);
-    // Charts uniquement si l'onglet dashboard est visible
     const dashTab = document.getElementById('fact-tab-dashboard');
     if (dashTab && !dashTab.classList.contains('hidden')) {
         factDrawCharts();
@@ -6411,7 +6465,10 @@ function factUpdateAll() {
 // --- KPIs ---
 function factUpdateKPIs() {
     const agg = factAggregate(factFilteredData);
+    const filteredEcheances = factGetFilteredEcheances();
     let totalCA = 0, toPascal = 0, sent = 0, paid = 0;
+    
+    // 1. Calculs Régie (T&M)
     agg.forEach(row => {
         const tjm = factTjm[row.client] || clientTjm[row.client] || 0;
         const montant = row.jours * tjm;
@@ -6421,6 +6478,15 @@ function factUpdateKPIs() {
         if (st.sent && !st.paid) sent += montant;
         if (st.paid) paid += montant;
     });
+
+    // 2. Calculs Forfait (Échéances)
+    filteredEcheances.forEach(e => {
+        totalCA += e.montant;
+        if (!e.pascal) toPascal += e.montant;
+        if (e.sent && !e.paid) sent += e.montant;
+        if (e.paid) paid += e.montant;
+    });
+
     const fmt = v => v > 0 ? v.toLocaleString('fr-FR', {maximumFractionDigits:0}) + ' €' : '—';
     document.getElementById('fact-kpi-ca').innerText = fmt(totalCA);
     document.getElementById('fact-kpi-pascal').innerText = fmt(toPascal);
@@ -6432,6 +6498,7 @@ function factUpdateKPIs() {
 function factDrawCharts() {
     if (typeof Chart === 'undefined') return;
     const agg = factAggregate(factFilteredData);
+    const filteredEcheances = factGetFilteredEcheances();
 
     // CA par client
     const byClient = {};
@@ -6439,6 +6506,10 @@ function factDrawCharts() {
         const tjm = factTjm[r.client] || clientTjm[r.client] || 0;
         byClient[r.client] = (byClient[r.client] || 0) + r.jours * tjm;
     });
+    filteredEcheances.forEach(e => {
+        byClient[e.client] = (byClient[e.client] || 0) + e.montant;
+    });
+    
     const clientEntries = Object.entries(byClient).sort((a,b) => b[1]-a[1]);
     const ctxC = document.getElementById('fact-chart-client')?.getContext('2d');
     if (ctxC) {
@@ -6458,6 +6529,11 @@ function factDrawCharts() {
         const label = r.client + ' / ' + r.mission;
         byEnv[label] = (byEnv[label] || 0) + r.jours * tjm;
     });
+    filteredEcheances.forEach(e => {
+        const label = e.client + ' / ' + e.mission;
+        byEnv[label] = (byEnv[label] || 0) + e.montant;
+    });
+
     const envEntries = Object.entries(byEnv).sort((a,b) => b[1]-a[1]).slice(0, 12);
     const ctxE = document.getElementById('fact-chart-envelope')?.getContext('2d');
     if (ctxE) {
@@ -6482,6 +6558,15 @@ function factDrawCharts() {
         if (st.paid) byMois[r.sortDate].paid += montant;
         else if (st.sent) byMois[r.sortDate].sent += montant;
     });
+    filteredEcheances.forEach(e => {
+        const parts = e.moisAnnee.split('/');
+        const sortDate = parts.length === 2 ? `${parts[1]}-${parts[0]}` : '0000-00';
+        if (!byMois[sortDate]) byMois[sortDate] = { label: e.moisAnnee, total: 0, paid: 0, sent: 0 };
+        byMois[sortDate].total += e.montant;
+        if (e.paid) byMois[sortDate].paid += e.montant;
+        else if (e.sent) byMois[sortDate].sent += e.montant;
+    });
+
     const sortedMois = Object.keys(byMois).filter(k => k !== '0000-00').sort();
     const ctxT = document.getElementById('fact-chart-evolution')?.getContext('2d');
     if (ctxT) {
@@ -6506,10 +6591,11 @@ function factDrawCharts() {
         });
     }
 }
+// --- CALCUL DES KPIs GLOBAUX (ACCUEIL) ---
 function getGlobalKPIs() {
     const data = (factData && factData.length > 0) ? factData : (rawData || []);
     
-    // Calcul du mois précédent pour le filtre automatique (ex: 03/2026)
+    // Calcul du mois précédent pour le filtre automatique
     const now = new Date();
     now.setMonth(now.getMonth() - 1);
     const lastMonthStr = `${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
@@ -6518,8 +6604,8 @@ function getGlobalKPIs() {
     let totalHT = 0;
     let totalJours = 0;
     
+    // 1. Calcul de la régie (temps passé)
     data.forEach(d => {
-        // Condition CRITIQUE : on ne traite que le mois dernier pour éviter les chiffres démesurés
         if (d.moisAnnee === lastMonthStr) {
             const tjm = factTjm[d.client] || clientTjm[d.client] || 0;
             const st = factGetStatut(d.client, d.mission, d.moisAnnee);
@@ -6533,6 +6619,18 @@ function getGlobalKPIs() {
             }
         }
     });
+
+    // 2. Calcul des échéances au forfait
+    if (typeof factEcheances !== 'undefined') {
+        factEcheances.forEach(e => {
+            if (e.moisAnnee === lastMonthStr) {
+                totalHT += e.montant;
+                if (!e.paid && !e.sent && !e.pascal) {
+                    pendingFact += e.montant;
+                }
+            }
+        });
+    }
 
     return {
         pending: pendingFact.toLocaleString('fr-FR') + " €",
@@ -6550,58 +6648,88 @@ function factRenderTable() {
     const fMois = document.getElementById('fact-tbl-mois')?.value || '';
     const fStatut = document.getElementById('fact-tbl-statut')?.value || '';
 
+    let combinedRows = [];
+
+    // 1. Lignes T&M (Régie)
     let data = factAggregate(factFilteredData);
-    if (fClient) data = data.filter(r => r.client === fClient);
-    if (fMois) data = data.filter(r => r.moisAnnee === fMois);
+    data.forEach(r => {
+        const tjm = factTjm[r.client] || clientTjm[r.client] || 0;
+        const st = factGetStatut(r.client, r.mission, r.moisAnnee);
+        combinedRows.push({
+            type: 'tm', id: factGetStatutKey(r.client, r.mission, r.moisAnnee),
+            client: r.client, mission: r.mission, moisAnnee: r.moisAnnee, description: 'Régie (Temps x TJM)',
+            jours: r.jours, tjm: tjm, montant: r.jours * tjm, st: st
+        });
+    });
+
+    // 2. Lignes Échéances (Forfait)
+    let echeances = factGetFilteredEcheances();
+    echeances.forEach(e => {
+        combinedRows.push({
+            type: 'ech', id: e.id,
+            client: e.client, mission: e.mission, moisAnnee: e.moisAnnee, description: e.description || 'Échéance Forfait',
+            jours: null, tjm: null, montant: e.montant, st: { pascal: e.pascal, sent: e.sent, paid: e.paid }
+        });
+    });
+
+    // Filtres
+    if (fClient) combinedRows = combinedRows.filter(r => r.client === fClient);
+    if (fMois) combinedRows = combinedRows.filter(r => r.moisAnnee === fMois);
     if (fStatut) {
-        data = data.filter(r => {
-            const st = factGetStatut(r.client, r.mission, r.moisAnnee);
-            if (fStatut === 'todo') return !st.pascal;
-            if (fStatut === 'sent') return st.sent && !st.paid;
-            if (fStatut === 'paid') return st.paid;
+        combinedRows = combinedRows.filter(r => {
+            if (fStatut === 'todo') return !r.st.pascal;
+            if (fStatut === 'sent') return r.st.sent && !r.st.paid;
+            if (fStatut === 'paid') return r.st.paid;
             return true;
         });
     }
 
-    if (data.length === 0) {
+    if (combinedRows.length === 0) {
         tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:24px;color:var(--ink-muted);font-size:13px;">Aucune ligne pour ces filtres.</td></tr>';
         return;
     }
 
-    tbody.innerHTML = data.map((row, idx) => {
-        const tjm = factTjm[row.client] || clientTjm[row.client] || 0;
-        const montant = row.jours * tjm;
-        const st = factGetStatut(row.client, row.mission, row.moisAnnee);
-        const k = factGetStatutKey(row.client, row.mission, row.moisAnnee);
-        const rowBg = st.paid ? 'background:rgba(94,176,145,.07)' : (st.sent ? 'background:rgba(42,81,122,.05)' : '');
-        const montantColor = st.paid ? '#4A9076' : (st.sent ? '#2A517A' : (montant > 0 ? 'var(--primary)' : 'var(--ink-muted)'));
+    // Tri par Mois décroissant puis par Client
+    combinedRows.sort((a, b) => {
+        const dateA = a.moisAnnee.split('/').reverse().join('');
+        const dateB = b.moisAnnee.split('/').reverse().join('');
+        if (dateA !== dateB) return dateB.localeCompare(dateA);
+        return a.client.localeCompare(b.client);
+    });
+
+    tbody.innerHTML = combinedRows.map((row) => {
+        const isEch = row.type === 'ech';
+        const rowBg = row.st.paid ? 'background:rgba(94,176,145,.07)' : (row.st.sent ? 'background:rgba(42,81,122,.05)' : '');
+        const montantColor = row.st.paid ? '#4A9076' : (row.st.sent ? '#2A517A' : (row.montant > 0 ? 'var(--primary)' : 'var(--ink-muted)'));
+        const typeBadge = isEch ? `<span style="background:var(--warn-soft);color:var(--warn-fg);padding:2px 4px;border-radius:4px;font-size:9px;font-weight:700;">FORFAIT</span>` : `<span style="background:var(--info-soft);color:var(--info-fg);padding:2px 4px;border-radius:4px;font-size:9px;font-weight:700;">RÉGIE</span>`;
+        
+        const cbBase = isEch 
+            ? `factSetEcheanceStatut('${row.id}'` 
+            : `factSetStatut('${row.client.replace(/'/g,"\\'")}', '${row.mission.replace(/'/g,"\\'")}', '${row.moisAnnee}'`;
 
         return `<tr style="border-bottom:1px solid var(--border-light);${rowBg};transition:.15s;">
             <td style="padding:10px 14px;font-weight:600;color:var(--primary);font-size:12px;">${row.client}</td>
-            <td style="padding:10px 14px;color:var(--ink-secondary);font-size:11px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${row.mission}">${row.mission}</td>
+            <td style="padding:10px 14px;color:var(--ink-secondary);font-size:11px;max-width:160px;">
+                <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;" title="${row.mission}">${row.mission}</div>
+                <div style="font-size:9px;margin-top:3px;display:flex;align-items:center;gap:4px;">${typeBadge} <span>${row.description}</span></div>
+            </td>
             <td style="padding:10px 14px;color:var(--ink-secondary);font-size:12px;font-family:'JetBrains Mono',monospace;">${row.moisAnnee}</td>
-            <td style="padding:10px 14px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-secondary);">${row.jours.toFixed(2)}</td>
-            <td style="padding:10px 14px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-muted);">${tjm > 0 ? tjm.toLocaleString('fr-FR') + ' €' : '<span style="color:var(--ink-muted);font-style:italic;">Non défini</span>'}</td>
-            <td style="padding:10px 14px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:${montantColor};">${montant > 0 ? montant.toLocaleString('fr-FR',{maximumFractionDigits:0}) + ' €' : '—'}</td>
+            <td style="padding:10px 14px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-secondary);">${isEch ? '—' : row.jours.toFixed(2)}</td>
+            <td style="padding:10px 14px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-muted);">${isEch ? '—' : (row.tjm > 0 ? row.tjm.toLocaleString('fr-FR') + ' €' : '<span style="color:var(--ink-muted);font-style:italic;">Non défini</span>')}</td>
+            <td style="padding:10px 14px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:${montantColor};">${row.montant > 0 ? row.montant.toLocaleString('fr-FR',{maximumFractionDigits:0}) + ' €' : '—'}</td>
             <td style="padding:10px 14px;text-align:center;">
                 <label style="display:inline-flex;align-items:center;gap:5px;cursor:pointer;" title="Envoyé à Pascal">
-                    <input type="checkbox" ${st.pascal?'checked':''} onchange="factSetStatut('${row.client.replace(/'/g,"\\'")}','${row.mission.replace(/'/g,"\\'")}','${row.moisAnnee}','pascal',this.checked)"
-                        style="width:16px;height:16px;cursor:pointer;accent-color:#D97706;">
-                    ${st.pascal ? '<span style="font-size:10px;color:#D97706;font-weight:600;">✓</span>' : ''}
+                    <input type="checkbox" ${row.st.pascal?'checked':''} onchange="${cbBase}, 'pascal', this.checked)" style="width:16px;height:16px;cursor:pointer;accent-color:#D97706;">
                 </label>
             </td>
             <td style="padding:10px 14px;text-align:center;">
                 <label style="display:inline-flex;align-items:center;gap:5px;cursor:pointer;" title="Facture envoyée">
-                    <input type="checkbox" ${st.sent?'checked':''} onchange="factSetStatut('${row.client.replace(/'/g,"\\'")}','${row.mission.replace(/'/g,"\\'")}','${row.moisAnnee}','sent',this.checked)"
-                        style="width:16px;height:16px;cursor:pointer;accent-color:#2A517A;">
-                    ${st.sent ? '<span style="font-size:10px;color:#2A517A;font-weight:600;">✓</span>' : ''}
+                    <input type="checkbox" ${row.st.sent?'checked':''} onchange="${cbBase}, 'sent', this.checked)" style="width:16px;height:16px;cursor:pointer;accent-color:#2A517A;">
                 </label>
             </td>
             <td style="padding:10px 14px;text-align:center;">
                 <label style="display:inline-flex;align-items:center;gap:5px;cursor:pointer;" title="Facture payée">
-                    <input type="checkbox" ${st.paid?'checked':''} onchange="factSetStatut('${row.client.replace(/'/g,"\\'")}','${row.mission.replace(/'/g,"\\'")}','${row.moisAnnee}','paid',this.checked)"
-                        style="width:16px;height:16px;cursor:pointer;accent-color:#5EB091;">
-                    ${st.paid ? '<span style="font-size:10px;color:#4A9076;font-weight:600;">✓</span>' : ''}
+                    <input type="checkbox" ${row.st.paid?'checked':''} onchange="${cbBase}, 'paid', this.checked)" style="width:16px;height:16px;cursor:pointer;accent-color:#5EB091;">
                 </label>
             </td>
         </tr>`;
@@ -6652,11 +6780,15 @@ function factRenderClientDetail(clientName) {
     const tjm = factTjm[clientName] || clientTjm[clientName] || 0;
     const totalJours = clientData.reduce((s, r) => s + r.jours, 0);
     
-    // TVA par client (20% par défaut)
     if (factStatuts[clientName + '_tva'] === undefined) factStatuts[clientName + '_tva'] = 20;
     const tvaRate = factStatuts[clientName + '_tva'];
 
-    const totalHT = totalJours * tjm;
+    let totalHT = totalJours * tjm;
+    
+    // Ajout des échéances au total HT
+    const echeancesClient = factEcheances.filter(e => e.client === clientName);
+    echeancesClient.forEach(e => totalHT += e.montant);
+
     const montantTVA = totalHT * (tvaRate / 100);
     const totalTTC = totalHT + montantTVA;
 
@@ -6685,6 +6817,28 @@ function factRenderClientDetail(clientName) {
         </div>`;
     }).join('');
 
+    const missionsList = [...new Set([...clientData.map(d=>d.mission), ...echeancesClient.map(e => e.mission)])];
+
+    let echeancesHtml = echeancesClient.map(e => {
+        const badge = e.paid ? `<span style="font-size:9px;padding:2px 7px;border-radius:10px;background:rgba(94,176,145,.15);color:#4A9076;font-weight:700;">Payée</span>` : e.sent ? `<span style="font-size:9px;padding:2px 7px;border-radius:10px;background:rgba(42,81,122,.12);color:#2A517A;font-weight:700;">Envoyée</span>` : e.pascal ? `<span style="font-size:9px;padding:2px 7px;border-radius:10px;background:rgba(217,119,6,.12);color:#D97706;font-weight:700;">→ Pascal</span>` : `<span style="font-size:9px;padding:2px 7px;border-radius:10px;background:var(--bg);color:var(--ink-muted);font-weight:600;border:1px solid var(--border);">À traiter</span>`;
+        return `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;background:var(--bg);">
+            <div style="flex:1;">
+                <div style="font-weight:700;font-size:13px;color:var(--primary);">${e.description || 'Jalon forfaitaire'}</div>
+                <div style="font-size:11px;color:var(--ink-muted);margin-top:2px;">Mission: <strong>${e.mission}</strong> • Mois: <span style="font-family:monospace;">${e.moisAnnee}</span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+                <div style="font-size:14px;font-weight:800;color:var(--secondary-dark);font-family:'JetBrains Mono',monospace;">${e.montant.toLocaleString('fr-FR')} €</div>
+                <div style="width:70px;text-align:center;">${badge}</div>
+                <button onclick="factDeleteEcheance('${e.id}')" style="background:none;border:none;color:var(--danger);cursor:pointer;font-size:14px;" title="Supprimer">🗑</button>
+            </div>
+        </div>`;
+    }).join('');
+
+    if (!echeancesHtml) echeancesHtml = '<div style="font-size:12px;color:var(--ink-muted);text-align:center;padding:20px;border:1px dashed var(--border);border-radius:8px;">Aucune échéance forfaitaire configurée.</div>';
+
+    const moisCourant = new Date().toLocaleDateString('fr-FR', { month: '2-digit', year: 'numeric' });
+
     el.innerHTML = `
         <div style="padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--border);">
             <h2 style="font-size:22px;font-weight:800;color:var(--primary);font-family:'Fraunces',serif;margin-bottom:15px;">${clientName}</h2>
@@ -6695,12 +6849,12 @@ function factRenderClientDetail(clientName) {
                 </div>
                 <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;">
                     <div style="font-size:9px;text-transform:uppercase;color:var(--ink-muted);margin-bottom:4px;">TJM HT</div>
-                    <input type="number" value="${tjm}" onchange="factSaveTjm('${clientName.replace(/'/g,"\\")}')" id="fact-tjm-${clientName.replace(/[^a-zA-Z0-9]/g,'_')}"
+                    <input type="number" value="${tjm}" onchange="factSaveTjm('${clientName.replace(/'/g,"\\'")}')" id="fact-tjm-${clientName.replace(/[^a-zA-Z0-9]/g,'_')}"
                         style="width:70px;font-size:14px;font-weight:700;text-align:center;border:1px solid var(--border);border-radius:4px;color:var(--primary);">
                 </div>
                 <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;">
                     <div style="font-size:9px;text-transform:uppercase;color:var(--ink-muted);margin-bottom:4px;">TVA %</div>
-                    <input type="number" value="${tvaRate}" onchange="factSaveTva('${clientName.replace(/'/g,"\\")}', this.value)"
+                    <input type="number" value="${tvaRate}" onchange="factSaveTva('${clientName.replace(/'/g,"\\'")}', this.value)"
                         style="width:60px;font-size:14px;font-weight:700;text-align:center;border:1px solid var(--border);border-radius:4px;color:var(--secondary-dark);">
                 </div>
             </div>
@@ -6716,6 +6870,36 @@ function factRenderClientDetail(clientName) {
             </div>
         </div>
         ${enveloppeHtml}
+
+        <div class="mt-auto pt-6" style="border-top: 1px solid var(--border-subtle);">
+            <h3 class="text-sm font-bold flex items-center gap-2 mb-4" style="color: var(--primary);">
+                <span style="font-size:16px;">🎯</span> Échéances de facturation (Forfaits)
+            </h3>
+            ${echeancesHtml}
+            
+            <div style="margin-top:16px;padding:16px;border:1px solid var(--border);border-radius:8px;background:var(--surface);">
+                <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;">+ Ajouter une échéance</div>
+                <div style="display:grid;grid-template-columns:1fr 100px 100px auto;gap:10px;align-items:end;">
+                    <div>
+                        <input type="text" id="ech-desc" placeholder="Ex: Livraison Lot 1" class="form-input" style="font-size:12px;padding:8px 10px;">
+                    </div>
+                    <div>
+                        <select id="ech-mission" class="form-input" style="font-size:12px;padding:8px 10px;cursor:pointer;">
+                            ${missionsList.map(m => `<option value="${m}">${m}</option>`).join('')}
+                            <option value="Forfait Global">Forfait Global</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="text" id="ech-mois" placeholder="MM/YYYY" value="${moisCourant}" class="form-input" style="font-size:12px;padding:8px 10px;font-family:monospace;text-align:center;">
+                    </div>
+                    <div style="display:flex;gap:6px;align-items:center;">
+                        <input type="number" id="ech-montant" placeholder="Montant" class="form-input" style="font-size:12px;padding:8px 10px;width:90px;text-align:right;">
+                        <span style="font-size:12px;color:var(--ink-muted);font-weight:700;">€</span>
+                        <button class="btn btn-secondary" style="font-size:12px;padding:8px 14px;" onclick="factSaveEcheance('${clientName.replace(/'/g,"\\'")}', document.getElementById('ech-mission').value, document.getElementById('ech-mois').value, document.getElementById('ech-montant').value, document.getElementById('ech-desc').value)">Ajouter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     `;
 }
 
@@ -6727,22 +6911,48 @@ function factSaveTjm(clientName) {
     factUpdateAll();
 }
 
+function factSaveTva(clientName, val) {
+    factStatuts[clientName + '_tva'] = parseFloat(val) || 0;
+    SafeStorage.set('fact_statuts', factStatuts);
+    factUpdateKPIs();
+    factRenderClientDetail(clientName);
+}
+
+function factSelectClient(name) {
+    factCurrentClient = name;
+    factRenderClientList();
+    factRenderClientDetail(name);
+}
+
 // --- Export Excel ---
 function exportFacturateurExcel() {
     if (typeof XLSX === 'undefined') return;
     const agg = factAggregate(factFilteredData);
-    const rows = agg.map(r => {
+    let rows = agg.map(r => {
         const tjm = factTjm[r.client] || clientTjm[r.client] || 0;
         const st = factGetStatut(r.client, r.mission, r.moisAnnee);
         return {
-            'Client': r.client, 'Enveloppe': r.mission, 'Mois': r.moisAnnee,
-            'Jours': parseFloat(r.jours.toFixed(2)), 'TJM (€)': tjm,
+            'Type': 'Régie', 'Client': r.client, 'Enveloppe': r.mission, 'Mois': r.moisAnnee,
+            'Description': 'Régie (Temps x TJM)', 'Jours': parseFloat(r.jours.toFixed(2)), 'TJM (€)': tjm,
             'Montant (€)': parseFloat((r.jours * tjm).toFixed(2)),
             'Envoyé à Pascal': st.pascal ? 'Oui' : 'Non',
             'Facture envoyée': st.sent ? 'Oui' : 'Non',
             'Facture payée': st.paid ? 'Oui' : 'Non'
         };
     });
+
+    const echeances = factGetFilteredEcheances();
+    echeances.forEach(e => {
+        rows.push({
+            'Type': 'Forfait', 'Client': e.client, 'Enveloppe': e.mission, 'Mois': e.moisAnnee,
+            'Description': e.description, 'Jours': '', 'TJM (€)': '',
+            'Montant (€)': parseFloat(e.montant.toFixed(2)),
+            'Envoyé à Pascal': e.pascal ? 'Oui' : 'Non',
+            'Facture envoyée': e.sent ? 'Oui' : 'Non',
+            'Facture payée': e.paid ? 'Oui' : 'Non'
+        });
+    });
+
     const ws = XLSX.utils.json_to_sheet(rows);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Facturation');
@@ -6771,28 +6981,14 @@ function factInit() {
     }
 }
 
-
-
 // Init au chargement
 window.onload = function() {
     renderHomeGrid();
-	renderAllLinks();
+    renderAllLinks();
     checkLocalData();
     factInit();
-	renderHomeGrid();
+    renderHomeGrid();
 };
-function factSelectClient(name) {
-    factCurrentClient = name;
-    factRenderClientList();
-    factRenderClientDetail(name);
-}
-
-function factSaveTva(clientName, val) {
-    factStatuts[clientName + '_tva'] = parseFloat(val) || 0;
-    SafeStorage.set('fact_statuts', factStatuts);
-    factUpdateKPIs(); // Met à jour les compteurs du haut
-    factRenderClientDetail(clientName); // Rafraîchit la fiche
-}
 // ==========================================
 // SQL GENERATOR - LOGIQUE COMPLÈTE
 // ==========================================
@@ -8391,11 +8587,59 @@ navigateTo = function(page) {
 <button class="scratchpad-btn" onclick="toggleScratchpad()" title="Bloc-notes éphémère">📝</button>
 <div class="scratchpad-panel" id="scratchpad-panel">
   <div class="scratchpad-header">
-    <span>📝 Scratchpad (Auto-save)</span>
-    <button onclick="toggleScratchpad()" style="background:none;border:none;color:white;cursor:pointer;font-size:16px;">×</button>
+    <div style="display:flex;gap:0;align-items:center;">
+      <button id="sp-tab-edit" onclick="ScratchpadArchive.switchTab('edit')" style="background:rgba(255,255,255,.2);border:none;color:#fff;cursor:pointer;font-size:11px;padding:3px 10px;border-radius:4px 0 0 4px;font-weight:600;">📝 Éditeur</button>
+      <button id="sp-tab-arch" onclick="ScratchpadArchive.switchTab('arch')" style="background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:11px;padding:3px 10px;border-radius:0 4px 4px 0;font-weight:600;">📂 Archives <span id="sp-arch-count" style="font-size:9px;background:rgba(255,255,255,.2);padding:1px 5px;border-radius:8px;margin-left:3px;">0</span></button>
+    </div>
+    <div style="display:flex;gap:4px;align-items:center;">
+      <button onclick="ScratchpadArchive.save()" title="Sauvegarder un snapshot" style="background:none;border:none;color:rgba(255,255,255,.8);cursor:pointer;font-size:13px;">💾</button>
+      <button onclick="ScratchpadArchive.clearCurrent()" title="Vider le scratchpad actuel" style="background:none;border:none;color:rgba(255,255,255,.8);cursor:pointer;font-size:13px;">🗑</button>
+      <button onclick="toggleScratchpad()" style="background:none;border:none;color:white;cursor:pointer;font-size:16px;">×</button>
+    </div>
   </div>
-  <textarea id="scratchpad-text" class="scratchpad-area" placeholder="Collez vos logs, IDs, requêtes temporaires ici. Tout est sauvegardé automatiquement..." oninput="localStorage.setItem('cyrias_scratchpad', this.value)"></textarea>
+  <div id="sp-view-edit" style="flex:1;display:flex;flex-direction:column;min-height:0;">
+    <textarea id="scratchpad-text" class="scratchpad-area" placeholder="Collez vos logs, IDs, requêtes temporaires ici. Tout est sauvegardé automatiquement..." oninput="localStorage.setItem('cyrias_scratchpad', this.value)"></textarea>
+  </div>
+  <div id="sp-view-arch" style="flex:1;display:none;flex-direction:column;min-height:0;overflow-y:auto;padding:8px;">
+    <div id="sp-arch-list"></div>
+  </div>
 </div>
+<!-- ===== v20 NEW PAGES ===== -->
+<div class="page" id="page-journal">
+  <div class="page-header"><div><h1>📓 Journal de bord</h1><p>Notes quotidiennes, standup, blocages & décisions</p></div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-outline" onclick="Journal.exportMd()">📥 Export .docx</button>
+      <button class="btn btn-primary" onclick="Journal.newEntry()">+ Nouvelle entrée</button>
+    </div>
+  </div>
+  <div class="tools-container">
+    <div style="display:flex;gap:12px;margin-bottom:16px;">
+      <input type="text" id="journal-search" placeholder="Rechercher dans le journal..." oninput="Journal.render()" style="flex:1;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;background:var(--surface);color:var(--ink);">
+      <select id="journal-filter" onchange="Journal.render()" style="padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--surface);color:var(--ink);">
+        <option value="all">Toutes les entrées</option><option value="standup">🟢 Standup</option><option value="blocage">🔴 Blocage</option><option value="decision">🟡 Décision</option><option value="note">📝 Note</option>
+      </select>
+    </div>
+    <div id="journal-entries" style="display:flex;flex-direction:column;gap:12px;"></div>
+  </div>
+</div>
+
+<div class="page" id="page-notifcenter">
+  <div class="page-header"><div><h1>🔔 Centre d'alertes</h1><p>Notifications, SLA, deadlines & anomalies en temps réel</p></div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-outline" onclick="NotifCenter.markAllRead()">✓ Tout lire</button>
+      <button class="btn btn-outline" onclick="NotifCenter.clear()">🗑 Vider</button>
+    </div>
+  </div>
+  <div class="tools-container">
+    <div id="notif-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+    <div id="notif-empty" style="text-align:center;padding:60px 20px;color:var(--ink-muted);display:none;">
+      <div style="font-size:48px;margin-bottom:12px;">🔕</div>
+      <p>Aucune notification pour le moment</p>
+    </div>
+  </div>
+</div>
+<!-- ===== /v20 NEW PAGES ===== -->
+
 <script>
 setTimeout(() => {
     const mainContent = document.querySelector('.main-content');
@@ -14551,7 +14795,8 @@ const FLUSHABLE_MODULES = [
   { key: 'cyrias_snippets', label: 'Snippets de code', module: 'Snippetator' },
   { key: 'compagnon_links', label: 'Liens enregistrés', module: 'Liens' },
   { key: 'compagnon_cats', label: 'Catégories de liens', module: 'Liens' },
-  { key: 'cyrias_scratchpad', label: 'Bloc-notes rapide', module: 'Scratchpad' },
+  { key: 'cyrias_scratchpad', label: 'Bloc-notes rapide (contenu actuel)', module: 'Scratchpad' },
+  { key: 'cyrias_scratchpad_archives', label: 'Archives du Scratchpad', module: 'Scratchpad' },
   { key: 'cyrias_sql_templates_custom', label: 'Templates SQL personnalisés', module: 'SQL Generator' },
 ];
 
@@ -16282,6 +16527,1119 @@ window.addEventListener('load', () => {
       grid.appendChild(dbgBtn);
     }
   }, 1500);
+});
+
+
+/* ============================================================================
+   v20 — 12 NOUVELLES FEATURES
+   ============================================================================ */
+
+// ===== FEATURE 2: Centre de Notifications =====
+const NotifCenter = {
+  KEY: 'cyrias_notifications',
+  getAll() { try { return JSON.parse(localStorage.getItem(this.KEY) || '[]'); } catch(e) { return []; } },
+  save(n) { safeLocalSet(this.KEY, JSON.stringify(n)); },
+  add(type, title, body, severity='info') {
+    const n = this.getAll();
+    n.unshift({ id: Date.now(), type, title, body, severity, read: false, ts: Date.now(), date: new Date().toISOString() });
+    if (n.length > 200) n.length = 200;
+    this.save(n);
+    this.updateBadge();
+    this.render();
+  },
+  markAllRead() {
+    const n = this.getAll().map(x => ({...x, read: true}));
+    this.save(n);
+    this.updateBadge();
+    this.render();
+    toastOk('Toutes les notifications lues');
+  },
+  clear() {
+    if (!confirm('Supprimer toutes les notifications ?')) return;
+    this.save([]);
+    this.updateBadge();
+    this.render();
+  },
+  updateBadge() {
+    const badge = document.getElementById('notif-badge');
+    if (!badge) return;
+    const count = this.getAll().filter(n => !n.read).length;
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'inline-block' : 'none';
+  },
+  render() {
+    const list = document.getElementById('notif-list');
+    const empty = document.getElementById('notif-empty');
+    if (!list) return;
+    const notifs = this.getAll();
+    if (!notifs.length) { list.innerHTML = ''; if(empty) empty.style.display = 'block'; return; }
+    if(empty) empty.style.display = 'none';
+    const sevColors = { danger: 'var(--danger)', warn: 'var(--warn)', info: 'var(--info)', ok: 'var(--ok)' };
+    const sevIcons = { danger: '🔴', warn: '🟠', info: '🔵', ok: '🟢' };
+    list.innerHTML = notifs.map(n => `
+      <div class="tool-card" style="padding:14px 18px;border-left:4px solid ${sevColors[n.severity] || sevColors.info};opacity:${n.read ? 0.6 : 1};cursor:pointer;" onclick="NotifCenter.markRead(${n.id})">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <strong style="font-size:13px;">${sevIcons[n.severity] || '🔵'} ${escapeHtml(n.title)}</strong>
+          <span style="font-size:11px;color:var(--ink-muted);">${new Date(n.ts).toLocaleString('fr-FR')}</span>
+        </div>
+        <p style="font-size:12px;color:var(--ink-secondary);margin:0;">${escapeHtml(n.body)}</p>
+        <span style="font-size:10px;color:var(--ink-muted);text-transform:uppercase;">${escapeHtml(n.type)}</span>
+      </div>`).join('');
+  },
+  markRead(id) {
+    const n = this.getAll().map(x => x.id === id ? {...x, read: true} : x);
+    this.save(n);
+    this.updateBadge();
+    this.render();
+  }
+};
+window.NotifCenter = NotifCenter;
+
+// ===== FEATURE 3: Multi-utilisateur léger (Kanban share) =====
+const KanbanShare = {
+  exportBoard() {
+    try {
+      const data = localStorage.getItem('cyrias_kanban_tasks');
+      if (!data) { toastWarn('Aucune donnée Kanban'); return; }
+      const blob = new Blob([JSON.stringify({ type: 'cyrias_kanban_share', version: 1, user: localStorage.getItem('cyrias_username') || 'Anonyme', date: new Date().toISOString(), tasks: JSON.parse(data) }, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `kanban-share-${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      toastOk('Board Kanban exporté !');
+      AuditLog.log('kanban_export', 'Export partagé');
+    } catch(e) { toastWarn('Erreur export: ' + e.message); }
+  },
+  importBoard() {
+    const input = document.createElement('input');
+    input.type = 'file'; input.accept = '.json';
+    input.onchange = (e) => {
+      const f = e.target.files[0]; if (!f) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        try {
+          const d = JSON.parse(ev.target.result);
+          if (d.type !== 'cyrias_kanban_share') { toastWarn('Fichier invalide'); return; }
+          if (!confirm(`Importer le board de ${d.user || 'inconnu'} (${d.tasks?.length || 0} tâches) ? Cela REMPLACERA votre board actuel.`)) return;
+          safeLocalSet('cyrias_kanban_tasks', JSON.stringify(d.tasks));
+          toastOk(`Board importé depuis ${d.user} !`);
+          AuditLog.log('kanban_import', `Import de ${d.user}`);
+          if (typeof renderKanban === 'function') renderKanban();
+        } catch(err) { toastWarn('Erreur import: ' + err.message); }
+      };
+      reader.readAsText(f);
+    };
+    input.click();
+  }
+};
+window.KanbanShare = KanbanShare;
+
+// ===== FEATURE 4: Dashboard personnalisable (widgets) =====
+const DashWidgets = {
+  KEY: 'cyrias_dash_widgets',
+  defaults: ['kpis','kanban_summary','anomalies','pomodoro_mini','shortcuts','recent_journal'],
+  getConfig() {
+    try { return JSON.parse(localStorage.getItem(this.KEY)) || [...this.defaults]; }
+    catch(e) { return [...this.defaults]; }
+  },
+  save(c) { safeLocalSet(this.KEY, JSON.stringify(c)); },
+  available: {
+    kpis: { label: '📊 KPIs globaux', render: () => { const k = typeof getGlobalKPIs === 'function' ? getGlobalKPIs() : {}; return `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">${[['Demandes',k.totalDemandes||0,'var(--info)'],['Kanban',k.kanbanTotal||0,'var(--brand)'],['Budget util.',k.budgetUsedPct?k.budgetUsedPct+'%':'N/A','var(--warn)']].map(([l,v,c])=>`<div style="background:var(--surface);padding:12px;border-radius:8px;border:1px solid var(--border);"><div style="font-size:20px;font-weight:700;color:${c};">${v}</div><div style="font-size:11px;color:var(--ink-muted);">${l}</div></div>`).join('')}</div>`; }},
+    kanban_summary: { label: '📋 Résumé Kanban', render: () => { try { const t = JSON.parse(localStorage.getItem('cyrias_kanban_tasks')||'[]'); const cols = {}; t.forEach(x => { cols[x.status||'backlog'] = (cols[x.status||'backlog']||0)+1; }); return `<div style="display:flex;gap:8px;flex-wrap:wrap;">${Object.entries(cols).map(([k,v])=>`<span style="background:var(--bg-subtle);padding:4px 10px;border-radius:6px;font-size:12px;">${k}: <strong>${v}</strong></span>`).join('')}</div><div style="font-size:11px;color:var(--ink-muted);margin-top:6px;">${t.length} tâche(s) total</div>`; } catch(e) { return '<em>Aucune donnée</em>'; }}},
+    anomalies: { label: '⚠️ Anomalies', render: () => { const a = typeof AnomalyDetector !== 'undefined' ? AnomalyDetector.scan().filter(x=>x.severity!=='info') : []; return a.length ? a.slice(0,3).map(x=>`<div style="font-size:12px;padding:4px 0;color:${x.severity==='high'?'var(--danger)':'var(--warn)'};">● ${escapeHtml(x.message)}</div>`).join('') : '<div style="color:var(--ok-fg);font-size:12px;">✅ Aucune anomalie</div>'; }},
+    pomodoro_mini: { label: '🍅 Pomodoro', render: () => { const s = typeof Pomodoro !== 'undefined' ? Pomodoro.state : {}; return `<div style="text-align:center;"><div style="font-size:28px;font-weight:700;font-family:'JetBrains Mono',monospace;">${s.running ? '⏱ En cours' : '⏸ Arrêté'}</div><div style="font-size:12px;color:var(--ink-muted);margin-top:4px;">${s.completedToday||0} pomodoro(s) aujourd'hui</div><button class="btn btn-outline" style="margin-top:8px;font-size:11px;" onclick="navigateTo('organisator')">Ouvrir Pomodoro</button></div>`; }},
+    shortcuts: { label: '⌨️ Raccourcis', render: () => '<div style="font-size:12px;line-height:2;color:var(--ink-secondary);"><kbd style="background:var(--bg-subtle);padding:2px 6px;border-radius:3px;font-family:monospace;font-size:11px;">Ctrl+K</kbd> Recherche &nbsp; <kbd style="background:var(--bg-subtle);padding:2px 6px;border-radius:3px;font-family:monospace;font-size:11px;">Ctrl+N</kbd> Nouvelle tâche &nbsp; <kbd style="background:var(--bg-subtle);padding:2px 6px;border-radius:3px;font-family:monospace;font-size:11px;">Ctrl+Shift+P</kbd> Pomodoro &nbsp; <kbd style="background:var(--bg-subtle);padding:2px 6px;border-radius:3px;font-family:monospace;font-size:11px;">Ctrl+J</kbd> Journal</div>' },
+    recent_journal: { label: '📓 Journal récent', render: () => { const e = Journal.getAll().slice(0,3); return e.length ? e.map(x=>`<div style="font-size:12px;padding:4px 0;border-bottom:1px solid var(--border-subtle);"><span style="color:var(--ink-muted);">${x.date}</span> <strong>${escapeHtml(x.title||'Sans titre')}</strong></div>`).join('') : '<em style="font-size:12px;color:var(--ink-muted);">Aucune entrée</em>'; }},
+    burndown: { label: '📈 Burndown', render: () => { return '<canvas id="widget-burndown" width="300" height="150"></canvas><script>setTimeout(()=>{Burndown.renderMini()},100)<\/script>'; }},
+    weekly_report: { label: '📋 Rapport hebdo', render: () => { return WeeklyReport.getMiniSummary(); }}
+  },
+  renderDashboard() {
+    const home = document.getElementById('home-grid');
+    if (!home) return;
+    const config = this.getConfig();
+    let widgetHtml = '<div style="margin-bottom:12px;display:flex;justify-content:flex-end;"><button class="btn btn-outline" style="font-size:11px;" onclick="DashWidgets.openConfig()">⚙️ Personnaliser widgets</button></div>';
+    widgetHtml += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;">';
+    config.forEach(wid => {
+      const w = this.available[wid];
+      if (!w) return;
+      widgetHtml += `<div class="tool-card" style="padding:16px;" data-widget="${wid}"><div style="font-size:12px;font-weight:600;color:var(--ink-secondary);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.3px;">${w.label}</div><div>${w.render()}</div></div>`;
+    });
+    widgetHtml += '</div>';
+    // Keep existing grid, add widgets after
+    const existing = document.getElementById('dash-widgets-zone');
+    if (existing) { existing.innerHTML = widgetHtml; }
+    else {
+      const zone = document.createElement('div');
+      zone.id = 'dash-widgets-zone';
+      zone.style.marginTop = '20px';
+      zone.innerHTML = widgetHtml;
+      home.parentNode.insertBefore(zone, home.nextSibling);
+    }
+  },
+  openConfig() {
+    const config = this.getConfig();
+    const allKeys = Object.keys(this.available);
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay active';
+    modal.innerHTML = `<div class="modal" style="max-width:500px;">
+      <div class="modal-header"><h3>⚙️ Personnaliser le dashboard</h3></div>
+      <div class="modal-body" style="max-height:400px;overflow-y:auto;">
+        <p style="font-size:12px;color:var(--ink-muted);margin-bottom:12px;">Cochez les widgets à afficher. L'ordre suit la liste.</p>
+        ${allKeys.map(k => `<label style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid var(--border-subtle);cursor:pointer;">
+          <input type="checkbox" value="${k}" ${config.includes(k)?'checked':''} style="width:16px;height:16px;">
+          <span style="font-size:13px;">${this.available[k].label}</span>
+        </label>`).join('')}
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="this.closest('.modal-overlay').remove()">Annuler</button>
+        <button class="btn btn-primary" onclick="DashWidgets.saveConfig(this.closest('.modal-overlay'))">Enregistrer</button>
+      </div></div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener('click', e => { if(e.target === modal) modal.remove(); });
+  },
+  saveConfig(modal) {
+    const checks = modal.querySelectorAll('input[type=checkbox]:checked');
+    const config = Array.from(checks).map(c => c.value);
+    this.save(config);
+    modal.remove();
+    this.renderDashboard();
+    toastOk('Dashboard personnalisé !');
+  }
+};
+window.DashWidgets = DashWidgets;
+
+// ===== FEATURE 5: Raccourcis clavier globaux =====
+(function initGlobalShortcuts() {
+  document.addEventListener('keydown', (e) => {
+    // Ctrl+K: Recherche (already exists via openGlobalSearch)
+    if (e.ctrlKey && e.key === 'n' && !e.shiftKey) {
+      e.preventDefault();
+      // Quick new task in Kanban
+      navigateTo('kanban');
+      setTimeout(() => { const btn = document.querySelector('#page-kanban .btn-primary, #page-kanban button[onclick*="add"]'); if(btn) btn.click(); }, 200);
+    }
+    if (e.ctrlKey && e.shiftKey && e.key === 'P') {
+      e.preventDefault();
+      navigateTo('organisator');
+      setTimeout(() => { if(typeof Pomodoro !== 'undefined' && !Pomodoro.state.running) Pomodoro.start(); }, 200);
+    }
+    if (e.ctrlKey && e.key === 'j') {
+      e.preventDefault();
+      navigateTo('journal');
+    }
+    if (e.ctrlKey && e.shiftKey && e.key === 'N') {
+      e.preventDefault();
+      navigateTo('notifcenter');
+    }
+    // Ctrl+Shift+T: TV mode
+    if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+      e.preventDefault();
+      TVMode.toggle();
+    }
+  });
+})();
+
+// ===== FEATURE 6: PWA / Service Worker stub =====
+// Note: Full SW requires serving from HTTPS. We register a minimal cache-first SW if available.
+const PWAInstall = {
+  deferredPrompt: null,
+  init() {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      this.deferredPrompt = e;
+      this.showInstallBtn();
+    });
+  },
+  showInstallBtn() {
+    const card = document.getElementById('sprintb-config-card');
+    if (!card || document.getElementById('btn-pwa-install')) return;
+    const grid = card.querySelector('div[style*="grid-template-columns"]');
+    if (!grid) return;
+    const btn = document.createElement('button');
+    btn.id = 'btn-pwa-install';
+    btn.className = 'btn btn-outline';
+    btn.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;padding:14px 16px;text-align:left;gap:4px;';
+    btn.innerHTML = '<span style="font-weight:700;font-size:13px;">📱 Installer l\'app</span><span style="font-size:11px;color:var(--ink-muted);font-weight:400;">Ajouter Cyrias Buddy à l\'écran d\'accueil</span>';
+    btn.onclick = () => this.install();
+    grid.appendChild(btn);
+  },
+  async install() {
+    if (!this.deferredPrompt) { toastWarn('Installation non disponible'); return; }
+    this.deferredPrompt.prompt();
+    const { outcome } = await this.deferredPrompt.userChoice;
+    if (outcome === 'accepted') toastOk('Application installée !');
+    this.deferredPrompt = null;
+  }
+};
+PWAInstall.init();
+
+// ===== FEATURE 7: Historique & Undo global =====
+const UndoManager = {
+  KEY: 'cyrias_undo_stack',
+  MAX: 50,
+  getStack() { try { return JSON.parse(sessionStorage.getItem(this.KEY) || '[]'); } catch(e) { return []; }},
+  save(s) { sessionStorage.setItem(this.KEY, JSON.stringify(s)); },
+  push(action, lsKey, prevValue, description) {
+    const stack = this.getStack();
+    stack.push({ action, lsKey, prevValue, description, ts: Date.now() });
+    if (stack.length > this.MAX) stack.shift();
+    this.save(stack);
+  },
+  undo() {
+    const stack = this.getStack();
+    if (!stack.length) { toastWarn('Rien à annuler'); return; }
+    const last = stack.pop();
+    this.save(stack);
+    if (last.lsKey && last.prevValue !== undefined) {
+      if (last.prevValue === null) localStorage.removeItem(last.lsKey);
+      else localStorage.setItem(last.lsKey, last.prevValue);
+    }
+    toastOk(`↩️ Annulé : ${last.description || last.action}`);
+    // Refresh current page
+    const active = document.querySelector('.page[style*="display: block"], .page.active');
+    if (active) {
+      const id = active.id.replace('page-', '');
+      navigateTo(id);
+    }
+  }
+};
+window.UndoManager = UndoManager;
+// Ctrl+Z global (only when not in input/textarea)
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.key === 'z' && !e.target.matches('input,textarea,[contenteditable]')) {
+    e.preventDefault();
+    UndoManager.undo();
+  }
+});
+
+// ===== FEATURE 8: Templates de projets =====
+const ProjectTemplates = {
+  KEY: 'cyrias_project_templates',
+  builtIn: [
+    { id: 'tma_standard', name: '🔧 TMA Standard', tasks: [
+      { title: 'Analyse du ticket', status: 'backlog', priority: 'medium' },
+      { title: 'Développement', status: 'backlog', priority: 'high' },
+      { title: 'Tests unitaires', status: 'backlog', priority: 'medium' },
+      { title: 'Revue de code', status: 'backlog', priority: 'medium' },
+      { title: 'Livraison MEP', status: 'backlog', priority: 'high' },
+      { title: 'Validation client', status: 'backlog', priority: 'low' }
+    ]},
+    { id: 'sprint', name: '🏃 Sprint Agile', tasks: [
+      { title: 'Sprint planning', status: 'done', priority: 'high' },
+      { title: 'Daily standup setup', status: 'done', priority: 'low' },
+      { title: 'US #1 — Dev', status: 'in-progress', priority: 'high' },
+      { title: 'US #2 — Dev', status: 'backlog', priority: 'high' },
+      { title: 'Bug fixes', status: 'backlog', priority: 'medium' },
+      { title: 'Sprint review', status: 'backlog', priority: 'medium' },
+      { title: 'Rétrospective', status: 'backlog', priority: 'low' }
+    ]},
+    { id: 'onboarding', name: '👋 Onboarding collaborateur', tasks: [
+      { title: 'Accès VPN & email', status: 'backlog', priority: 'high' },
+      { title: 'Setup poste de travail', status: 'backlog', priority: 'high' },
+      { title: 'Formation outils internes', status: 'backlog', priority: 'medium' },
+      { title: 'Présentation équipe', status: 'backlog', priority: 'low' },
+      { title: 'Premier ticket assigné', status: 'backlog', priority: 'medium' }
+    ]}
+  ],
+  getCustom() { try { return JSON.parse(localStorage.getItem(this.KEY) || '[]'); } catch(e) { return []; } },
+  getAll() { return [...this.builtIn, ...this.getCustom()]; },
+  saveAsTemplate() {
+    const tasks = JSON.parse(localStorage.getItem('cyrias_kanban_tasks') || '[]');
+    if (!tasks.length) { toastWarn('Aucune tâche Kanban à sauvegarder'); return; }
+    const name = prompt('Nom du template :');
+    if (!name) return;
+    const custom = this.getCustom();
+    custom.push({ id: 'custom_' + Date.now(), name: '📦 ' + name, tasks: tasks.map(t => ({ title: t.title, status: 'backlog', priority: t.priority || 'medium' })) });
+    safeLocalSet(this.KEY, JSON.stringify(custom));
+    toastOk('Template sauvegardé !');
+  },
+  apply(templateId) {
+    const tpl = this.getAll().find(t => t.id === templateId);
+    if (!tpl) return;
+    if (!confirm(`Appliquer le template "${tpl.name}" ? (${tpl.tasks.length} tâches seront ajoutées au Kanban)`)) return;
+    const existing = JSON.parse(localStorage.getItem('cyrias_kanban_tasks') || '[]');
+    const newTasks = tpl.tasks.map(t => ({ ...t, id: 'tpl_' + Date.now() + '_' + Math.random().toString(36).slice(2,7), created: new Date().toISOString() }));
+    safeLocalSet('cyrias_kanban_tasks', JSON.stringify([...existing, ...newTasks]));
+    toastOk(`${newTasks.length} tâches ajoutées !`);
+    AuditLog.log('template_applied', tpl.name);
+    if (typeof renderKanban === 'function') renderKanban();
+  },
+  openPicker() {
+    const all = this.getAll();
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay active';
+    modal.innerHTML = `<div class="modal" style="max-width:500px;">
+      <div class="modal-header"><h3>📦 Templates de projets</h3></div>
+      <div class="modal-body" style="max-height:400px;overflow-y:auto;">
+        ${all.map(t => `<div class="tool-card" style="padding:14px;margin-bottom:8px;cursor:pointer;" onclick="ProjectTemplates.apply('${t.id}');this.closest('.modal-overlay').remove();">
+          <strong>${escapeHtml(t.name)}</strong><br><span style="font-size:11px;color:var(--ink-muted);">${t.tasks.length} tâches</span>
+        </div>`).join('')}
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="ProjectTemplates.saveAsTemplate();this.closest('.modal-overlay').remove();">💾 Sauver board actuel</button>
+        <button class="btn btn-outline" onclick="this.closest('.modal-overlay').remove()">Fermer</button>
+      </div></div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener('click', e => { if(e.target===modal) modal.remove(); });
+  }
+};
+window.ProjectTemplates = ProjectTemplates;
+
+// ===== FEATURE 9: Rapport hebdo auto-généré (DOCX) =====
+const WeeklyReport = {
+  generate() {
+    const now = new Date();
+    const weekAgo = new Date(now - 7*86400000);
+    const tasks = JSON.parse(localStorage.getItem('cyrias_kanban_tasks') || '[]');
+    const journal = Journal.getAll().filter(e => new Date(e.ts) >= weekAgo);
+    const anomalies = typeof AnomalyDetector !== 'undefined' ? AnomalyDetector.scan() : [];
+    const audit = (typeof AuditLog !== 'undefined' ? AuditLog.getAll() : []).filter(e => new Date(e.ts) >= weekAgo);
+    const pomos = typeof Pomodoro !== 'undefined' ? Pomodoro.state.completedToday || 0 : 0;
+    const doneTasks = tasks.filter(t => t.status === 'done' || t.status === 'Terminé');
+    const inProgress = tasks.filter(t => t.status === 'in-progress' || t.status === 'En cours');
+    const blocages = journal.filter(e => e.type === 'blocage');
+    const decisions = journal.filter(e => e.type === 'decision');
+    return { now, weekAgo, tasks, journal, doneTasks, inProgress, blocages, decisions, anomalies, audit, pomos };
+  },
+  getMiniSummary() {
+    const tasks = JSON.parse(localStorage.getItem('cyrias_kanban_tasks') || '[]');
+    const done = tasks.filter(t => t.status === 'done' || t.status === 'Terminé').length;
+    const wip = tasks.filter(t => t.status === 'in-progress' || t.status === 'En cours').length;
+    return `<div style="font-size:12px;line-height:1.8;">✅ ${done} terminées · 🔄 ${wip} en cours · 📋 ${tasks.length} total<br><button class="btn btn-outline" style="font-size:11px;margin-top:6px;" onclick="WeeklyReport.download()">📥 Rapport hebdo (.docx)</button></div>`;
+  },
+  async download() {
+    try {
+      if (!window.docx || !window.docx.Document) { toastWarn('Bibliothèque docx non chargée. Vérifiez votre connexion internet et rechargez la page.'); return; }
+      const d = this.generate();
+      const D = window.docx;
+      const BRAND = '1B3B5C';
+      const GREEN = '5EB091';
+      const user = localStorage.getItem('cyrias_username') || 'Équipe';
+
+      const heading = (text, level) => new D.Paragraph({
+        heading: level === 1 ? D.HeadingLevel.HEADING_1 : D.HeadingLevel.HEADING_2,
+        spacing: { before: level === 1 ? 300 : 200, after: 120 },
+        children: [new D.TextRun({ text, bold: true, size: level === 1 ? 32 : 26, font: 'Arial', color: BRAND })]
+      });
+
+      const bullet = (text, ref) => new D.Paragraph({
+        numbering: { reference: ref, level: 0 },
+        spacing: { after: 60 },
+        children: [new D.TextRun({ text, size: 22, font: 'Arial' })]
+      });
+
+      const emptyLine = () => new D.Paragraph({ spacing: { after: 80 }, children: [] });
+
+      const border = { style: D.BorderStyle.SINGLE, size: 1, color: 'CCCCCC' };
+      const borders = { top: border, bottom: border, left: border, right: border };
+
+      const metricRow = (label, value) => new D.TableRow({
+        children: [
+          new D.TableCell({ borders, width: { size: 5000, type: D.WidthType.DXA }, margins: { top: 60, bottom: 60, left: 120, right: 120 },
+            children: [new D.Paragraph({ children: [new D.TextRun({ text: label, size: 22, font: 'Arial', color: '475569' })] })] }),
+          new D.TableCell({ borders, width: { size: 4360, type: D.WidthType.DXA }, margins: { top: 60, bottom: 60, left: 120, right: 120 },
+            children: [new D.Paragraph({ alignment: D.AlignmentType.RIGHT, children: [new D.TextRun({ text: String(value), size: 22, font: 'Arial', bold: true })] })] })
+        ]
+      });
+
+      const children = [
+        // Title
+        new D.Paragraph({ spacing: { after: 40 }, children: [new D.TextRun({ text: 'RAPPORT HEBDOMADAIRE', size: 36, bold: true, font: 'Arial', color: BRAND })] }),
+        new D.Paragraph({ spacing: { after: 20 }, children: [new D.TextRun({ text: `Cyrias Buddy — ${user}`, size: 24, font: 'Arial', color: '5EB091' })] }),
+        new D.Paragraph({ spacing: { after: 60 }, border: { bottom: { style: D.BorderStyle.SINGLE, size: 6, color: GREEN, space: 1 } },
+          children: [new D.TextRun({ text: `Période : ${d.weekAgo.toLocaleDateString('fr-FR')} → ${d.now.toLocaleDateString('fr-FR')}  |  Généré le ${d.now.toLocaleString('fr-FR')}`, size: 20, font: 'Arial', color: '94A3B8' })] }),
+        emptyLine(),
+        // Tâches terminées
+        heading('Tâches terminées (' + d.doneTasks.length + ')', 1),
+        ...(d.doneTasks.length ? d.doneTasks.map(t => bullet('✅  ' + t.title, 'bullets')) : [new D.Paragraph({ children: [new D.TextRun({ text: 'Aucune tâche terminée cette semaine', size: 22, font: 'Arial', italics: true, color: '94A3B8' })] })]),
+        emptyLine(),
+        // En cours
+        heading('En cours (' + d.inProgress.length + ')', 1),
+        ...(d.inProgress.length ? d.inProgress.map(t => bullet('🔄  ' + t.title + (t.priority === 'high' ? '  ⚠️ Haute priorité' : ''), 'bullets2')) : [new D.Paragraph({ children: [new D.TextRun({ text: 'Aucune tâche en cours', size: 22, font: 'Arial', italics: true, color: '94A3B8' })] })]),
+        emptyLine(),
+        // Blocages
+        heading('Blocages (' + d.blocages.length + ')', 1),
+        ...(d.blocages.length ? d.blocages.map(b => bullet('🔴  ' + b.title + (b.body ? ' — ' + b.body.slice(0, 100) : ''), 'bullets3')) : [new D.Paragraph({ children: [new D.TextRun({ text: 'Aucun blocage signalé', size: 22, font: 'Arial', italics: true, color: '22C55E' })] })]),
+        emptyLine(),
+        // Décisions
+        heading('Décisions (' + d.decisions.length + ')', 1),
+        ...(d.decisions.length ? d.decisions.map(dc => bullet('🟡  ' + dc.title, 'bullets4')) : [new D.Paragraph({ children: [new D.TextRun({ text: 'Aucune décision cette semaine', size: 22, font: 'Arial', italics: true, color: '94A3B8' })] })]),
+        emptyLine(),
+        // Anomalies
+        heading('Anomalies détectées', 1),
+        ...(d.anomalies.filter(a => a.severity !== 'info').length ?
+          d.anomalies.filter(a => a.severity !== 'info').map(a => bullet('[' + a.severity.toUpperCase() + '] ' + a.message, 'bullets5')) :
+          [new D.Paragraph({ children: [new D.TextRun({ text: '✅ Aucune anomalie détectée', size: 22, font: 'Arial', color: '22C55E' })] })]),
+        emptyLine(),
+        // Métriques
+        heading('Métriques de la semaine', 1),
+        new D.Table({
+          width: { size: 9360, type: D.WidthType.DXA },
+          columnWidths: [5000, 4360],
+          rows: [
+            new D.TableRow({ children: [
+              new D.TableCell({ borders, width: { size: 5000, type: D.WidthType.DXA }, shading: { fill: BRAND, type: D.ShadingType.CLEAR }, margins: { top: 60, bottom: 60, left: 120, right: 120 },
+                children: [new D.Paragraph({ children: [new D.TextRun({ text: 'Indicateur', size: 22, bold: true, font: 'Arial', color: 'FFFFFF' })] })] }),
+              new D.TableCell({ borders, width: { size: 4360, type: D.WidthType.DXA }, shading: { fill: BRAND, type: D.ShadingType.CLEAR }, margins: { top: 60, bottom: 60, left: 120, right: 120 },
+                children: [new D.Paragraph({ alignment: D.AlignmentType.RIGHT, children: [new D.TextRun({ text: 'Valeur', size: 22, bold: true, font: 'Arial', color: 'FFFFFF' })] })] })
+            ]}),
+            metricRow('Actions auditées', d.audit.length),
+            metricRow('Entrées journal', d.journal.length),
+            metricRow('Pomodoros aujourd\'hui', d.pomos),
+            metricRow('Total tâches Kanban', d.tasks.length),
+            metricRow('Tâches terminées', d.doneTasks.length),
+            metricRow('Tâches en cours', d.inProgress.length),
+          ]
+        }),
+        emptyLine(), emptyLine(),
+        new D.Paragraph({ border: { top: { style: D.BorderStyle.SINGLE, size: 2, color: 'E5E9EE', space: 1 } }, spacing: { before: 200 },
+          children: [new D.TextRun({ text: 'Généré automatiquement par Cyrias Buddy v20', size: 18, font: 'Arial', italics: true, color: '94A3B8' })] })
+      ];
+
+      const doc = new D.Document({
+        numbering: { config: [
+          { reference: 'bullets', levels: [{ level: 0, format: D.LevelFormat.BULLET, text: '\u2022', alignment: D.AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 }}}}]},
+          { reference: 'bullets2', levels: [{ level: 0, format: D.LevelFormat.BULLET, text: '\u2022', alignment: D.AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 }}}}]},
+          { reference: 'bullets3', levels: [{ level: 0, format: D.LevelFormat.BULLET, text: '\u2022', alignment: D.AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 }}}}]},
+          { reference: 'bullets4', levels: [{ level: 0, format: D.LevelFormat.BULLET, text: '\u2022', alignment: D.AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 }}}}]},
+          { reference: 'bullets5', levels: [{ level: 0, format: D.LevelFormat.BULLET, text: '\u2022', alignment: D.AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 }}}}]},
+        ]},
+        styles: {
+          default: { document: { run: { font: 'Arial', size: 24 }}},
+          paragraphStyles: [
+            { id: 'Heading1', name: 'Heading 1', basedOn: 'Normal', next: 'Normal', quickFormat: true,
+              run: { size: 32, bold: true, font: 'Arial', color: BRAND },
+              paragraph: { spacing: { before: 240, after: 120 }, outlineLevel: 0 }},
+            { id: 'Heading2', name: 'Heading 2', basedOn: 'Normal', next: 'Normal', quickFormat: true,
+              run: { size: 26, bold: true, font: 'Arial', color: BRAND },
+              paragraph: { spacing: { before: 180, after: 100 }, outlineLevel: 1 }},
+          ]
+        },
+        sections: [{
+          properties: { page: { size: { width: 11906, height: 16838 }, margin: { top: 1134, right: 1134, bottom: 1134, left: 1134 }}},
+          children
+        }]
+      });
+
+      const buffer = await D.Packer.toBlob(doc);
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(buffer);
+      a.download = `rapport-hebdo-${new Date().toISOString().slice(0,10)}.docx`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      toastOk('Rapport hebdo téléchargé (.docx) !');
+      AuditLog.log('weekly_report', 'Rapport DOCX généré');
+    } catch(err) {
+      console.error('Erreur génération DOCX:', err);
+      toastWarn('Erreur : ' + err.message);
+    }
+  }
+};
+window.WeeklyReport = WeeklyReport;
+
+// ===== Export Suivi CRAminator → Word (.docx) =====
+async function exportSuiviToWord() {
+  try {
+    if (!window.docx || !window.docx.Document) { toastWarn('Bibliothèque docx non chargée. Vérifiez votre connexion internet et rechargez la page.'); return; }
+    const filterClient = document.getElementById('suivi-hist-client')?.value || '';
+    let data = (typeof suiviComments !== 'undefined') ? suiviComments : [];
+    if (filterClient) data = data.filter(c => c.client === filterClient);
+    if (!data.length) { toastWarn('Aucun commentaire de suivi à exporter.'); return; }
+
+    const D = window.docx;
+    const BRAND = '1B3B5C';
+    const GREEN = '5EB091';
+    const user = localStorage.getItem('cyrias_username') || 'Équipe';
+    const border = { style: D.BorderStyle.SINGLE, size: 1, color: 'CCCCCC' };
+    const borders = { top: border, bottom: border, left: border, right: border };
+    const cellMargins = { top: 60, bottom: 60, left: 120, right: 120 };
+
+    // Group by client
+    const byClient = {};
+    data.forEach(c => { (byClient[c.client] = byClient[c.client] || []).push(c); });
+
+    const children = [
+      new D.Paragraph({ spacing: { after: 40 }, children: [new D.TextRun({ text: 'SUIVI HEBDOMADAIRE', size: 36, bold: true, font: 'Arial', color: BRAND })] }),
+      new D.Paragraph({ spacing: { after: 20 }, children: [new D.TextRun({ text: `Cyrias Buddy — ${user}`, size: 24, font: 'Arial', color: GREEN })] }),
+      new D.Paragraph({ spacing: { after: 80 }, border: { bottom: { style: D.BorderStyle.SINGLE, size: 6, color: GREEN, space: 1 }},
+        children: [new D.TextRun({ text: `Export du ${new Date().toLocaleDateString('fr-FR')}${filterClient ? '  —  Client : ' + filterClient : '  —  Tous les clients'}`, size: 20, font: 'Arial', color: '94A3B8' })] }),
+    ];
+
+    Object.entries(byClient).forEach(([client, entries]) => {
+      // Client heading
+      children.push(new D.Paragraph({ spacing: { before: 300, after: 120 },
+        children: [new D.TextRun({ text: client, size: 30, bold: true, font: 'Arial', color: BRAND })] }));
+
+      // Table header
+      const headerCells = ['Semaine', 'Catégorie', 'Sujets en cours', 'Enveloppes', 'Points d\'attention', 'Auteur'].map((h, i) => {
+        const widths = [1200, 1200, 2500, 2000, 2000, 1100];
+        return new D.TableCell({ borders, width: { size: widths[i], type: D.WidthType.DXA }, shading: { fill: BRAND, type: D.ShadingType.CLEAR }, margins: cellMargins,
+          children: [new D.Paragraph({ children: [new D.TextRun({ text: h, size: 18, bold: true, font: 'Arial', color: 'FFFFFF' })] })] });
+      });
+
+      const rows = [new D.TableRow({ children: headerCells })];
+      const colWidths = [1200, 1200, 2500, 2000, 2000, 1100];
+
+      entries.sort((a, b) => (b.semaine || '').localeCompare(a.semaine || '')).forEach(c => {
+        const semLabel = typeof formatSemaine === 'function' ? formatSemaine(c.semaine) : (c.semaine || '');
+        const vals = [semLabel, c.categorie || '', c.sujets || '—', c.enveloppes || '—', c.attention || '—', c.auteur || ''];
+        const attentionIdx = 4;
+        rows.push(new D.TableRow({
+          children: vals.map((v, i) => new D.TableCell({
+            borders, width: { size: colWidths[i], type: D.WidthType.DXA }, margins: cellMargins,
+            shading: (i === attentionIdx && v && v !== '—') ? { fill: 'FEF3C7', type: D.ShadingType.CLEAR } : undefined,
+            children: [new D.Paragraph({ children: [new D.TextRun({ text: v, size: 18, font: 'Arial', color: (i === attentionIdx && v && v !== '—') ? 'D97706' : '333333' })] })]
+          }))
+        }));
+      });
+
+      children.push(new D.Table({ width: { size: 10000, type: D.WidthType.DXA }, columnWidths: colWidths, rows }));
+    });
+
+    // Footer
+    children.push(new D.Paragraph({ spacing: { before: 300 }, border: { top: { style: D.BorderStyle.SINGLE, size: 2, color: 'E5E9EE', space: 1 }},
+      children: [new D.TextRun({ text: 'Généré automatiquement par Cyrias Buddy v20', size: 18, font: 'Arial', italics: true, color: '94A3B8' })] }));
+
+    const doc = new D.Document({
+      styles: { default: { document: { run: { font: 'Arial', size: 22 }}}},
+      sections: [{
+        properties: { page: { size: { width: 16838, height: 11906, orientation: D.PageOrientation.LANDSCAPE }, margin: { top: 850, right: 850, bottom: 850, left: 850 }}},
+        children
+      }]
+    });
+
+    const buffer = await D.Packer.toBlob(doc);
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(buffer);
+    let fileName = 'Suivi_Hebdo';
+    if (filterClient) fileName += '_' + filterClient.replace(/\s+/g, '_');
+    fileName += '_' + new Date().toISOString().split('T')[0] + '.docx';
+    a.download = fileName;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toastOk('Suivi exporté en Word !');
+    AuditLog.log('suivi_export_word', filterClient || 'tous');
+  } catch(err) {
+    console.error('Erreur export Word suivi:', err);
+    toastWarn('Erreur : ' + err.message);
+  }
+}
+window.exportSuiviToWord = exportSuiviToWord;
+
+// ===== FEATURE 10: Burndown / Burnup chart =====
+const Burndown = {
+  renderMini() {
+    const canvas = document.getElementById('widget-burndown');
+    if (!canvas) return;
+    const tasks = JSON.parse(localStorage.getItem('cyrias_kanban_tasks') || '[]');
+    // Build simple cumulative data from task creation dates
+    const byDate = {};
+    const doneByDate = {};
+    tasks.forEach(t => {
+      const d = (t.created || t.date || new Date().toISOString()).slice(0, 10);
+      byDate[d] = (byDate[d] || 0) + 1;
+      if (t.status === 'done' || t.status === 'Terminé') doneByDate[d] = (doneByDate[d] || 0) + 1;
+    });
+    const dates = Object.keys({...byDate, ...doneByDate}).sort();
+    if (dates.length < 2) {
+      const ctx = canvas.getContext('2d');
+      ctx.font = '12px sans-serif';
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--ink-muted');
+      ctx.fillText('Pas assez de données', 10, 80);
+      return;
+    }
+    let cumTotal = 0, cumDone = 0;
+    const totalData = [], doneData = [];
+    dates.forEach(d => {
+      cumTotal += (byDate[d] || 0);
+      cumDone += (doneByDate[d] || 0);
+      totalData.push(cumTotal);
+      doneData.push(cumDone);
+    });
+    new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels: dates.map(d => d.slice(5)),
+        datasets: [
+          { label: 'Total', data: totalData, borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, tension: 0.3, pointRadius: 2 },
+          { label: 'Terminées', data: doneData, borderColor: '#22C55E', backgroundColor: 'rgba(34,197,94,0.1)', fill: true, tension: 0.3, pointRadius: 2 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { font: { size: 10 }}}}, scales: { x: { ticks: { font: { size: 9 }}}, y: { beginAtZero: true, ticks: { font: { size: 9 }}}}}
+    });
+  }
+};
+window.Burndown = Burndown;
+
+// ===== FEATURE 11: Scoring de priorité IA =====
+const AIPriority = {
+  score(task) {
+    let s = 50;
+    // Priority
+    if (task.priority === 'high' || task.priority === 'haute') s += 30;
+    else if (task.priority === 'medium' || task.priority === 'moyenne') s += 15;
+    // SLA / deadline
+    if (task.deadline) {
+      const days = (new Date(task.deadline) - new Date()) / 86400000;
+      if (days < 0) s += 40; // overdue
+      else if (days < 2) s += 25;
+      else if (days < 7) s += 10;
+    }
+    // Status boost for in-progress (keep momentum)
+    if (task.status === 'in-progress' || task.status === 'En cours') s += 10;
+    // Blocked = deprioritize
+    if (task.status === 'blocked' || task.status === 'Bloqué') s -= 20;
+    return Math.max(0, Math.min(100, s));
+  },
+  suggestOrder() {
+    const tasks = JSON.parse(localStorage.getItem('cyrias_kanban_tasks') || '[]');
+    const active = tasks.filter(t => t.status !== 'done' && t.status !== 'Terminé');
+    const scored = active.map(t => ({ ...t, aiScore: this.score(t) })).sort((a, b) => b.aiScore - a.aiScore);
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay active';
+    modal.innerHTML = `<div class="modal" style="max-width:550px;">
+      <div class="modal-header"><h3>🤖 Priorités suggérées par l'IA</h3></div>
+      <div class="modal-body" style="max-height:450px;overflow-y:auto;">
+        <p style="font-size:12px;color:var(--ink-muted);margin-bottom:12px;">Score calculé selon : priorité, deadline, statut, urgence SLA</p>
+        ${scored.map((t,i) => `<div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-bottom:1px solid var(--border-subtle);">
+          <span style="font-size:18px;font-weight:700;color:${t.aiScore>70?'var(--danger)':t.aiScore>40?'var(--warn)':'var(--ink-muted)'};width:40px;text-align:center;">#${i+1}</span>
+          <div style="flex:1;"><strong style="font-size:13px;">${escapeHtml(t.title)}</strong><br><span style="font-size:11px;color:var(--ink-muted);">Score: ${t.aiScore}/100 · ${t.priority||'?'} · ${t.status||'?'}</span></div>
+        </div>`).join('')}
+      </div>
+      <div class="modal-footer"><button class="btn btn-outline" onclick="this.closest('.modal-overlay').remove()">Fermer</button></div></div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener('click', e => { if(e.target===modal) modal.remove(); });
+  }
+};
+window.AIPriority = AIPriority;
+
+// ===== FEATURE 12: Export iCal =====
+const ICalExport = {
+  export() {
+    const tasks = JSON.parse(localStorage.getItem('cyrias_kanban_tasks') || '[]');
+    const withDeadline = tasks.filter(t => t.deadline);
+    if (!withDeadline.length) { toastWarn('Aucune tâche avec deadline'); return; }
+    const now = new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
+    let ical = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Cyrias Buddy//v20//FR\r\n';
+    withDeadline.forEach(t => {
+      const dt = new Date(t.deadline).toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
+      ical += `BEGIN:VEVENT\r\nDTSTAMP:${now}\r\nDTSTART:${dt}\r\nDTEND:${dt}\r\nSUMMARY:${(t.title||'Tâche').replace(/[,;\\]/g,' ')}\r\nDESCRIPTION:Priorité: ${t.priority||'N/A'} | Status: ${t.status||'N/A'}\r\nUID:${t.id}@cyrias-buddy\r\nEND:VEVENT\r\n`;
+    });
+    ical += 'END:VCALENDAR\r\n';
+    const blob = new Blob([ical], { type: 'text/calendar' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'cyrias-deadlines.ics';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toastOk(`${withDeadline.length} événement(s) exporté(s) !`);
+  }
+};
+window.ICalExport = ICalExport;
+
+// ===== FEATURE 13: Mode Présentation / TV =====
+const TVMode = {
+  active: false,
+  toggle() {
+    this.active = !this.active;
+    if (this.active) {
+      document.body.classList.add('tv-mode');
+      const sidebar = document.querySelector('.sidebar');
+      if (sidebar) sidebar.classList.add('hidden');
+      document.body.classList.add('sb-hidden');
+      toastOk('📺 Mode TV activé — Ctrl+Shift+T pour quitter');
+    } else {
+      document.body.classList.remove('tv-mode');
+      toastOk('Mode TV désactivé');
+    }
+  }
+};
+window.TVMode = TVMode;
+
+// TV Mode CSS
+(function() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .tv-mode .page-header { display: none !important; }
+    .tv-mode .main-content { padding: 16px !important; margin-left: 0 !important; }
+    .tv-mode .tool-card { font-size: 16px; }
+    .tv-mode .tools-container { max-width: 100%; }
+  `;
+  document.head.appendChild(style);
+})();
+
+// ===== FEATURE 14: Journal de bord =====
+const Journal = {
+  KEY: 'cyrias_journal',
+  getAll() { try { return JSON.parse(localStorage.getItem(this.KEY) || '[]'); } catch(e) { return []; } },
+  save(entries) { safeLocalSet(this.KEY, JSON.stringify(entries)); },
+  newEntry() {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay active';
+    modal.innerHTML = `<div class="modal" style="max-width:550px;">
+      <div class="modal-header"><h3>📓 Nouvelle entrée</h3></div>
+      <div class="modal-body">
+        <div style="margin-bottom:12px;">
+          <label class="kf-label">Type</label>
+          <select id="je-type" class="kf-input"><option value="note">📝 Note</option><option value="standup">🟢 Standup</option><option value="blocage">🔴 Blocage</option><option value="decision">🟡 Décision</option></select>
+        </div>
+        <div style="margin-bottom:12px;">
+          <label class="kf-label">Titre</label>
+          <input type="text" id="je-title" class="kf-input" placeholder="Titre de l'entrée...">
+        </div>
+        <div style="margin-bottom:12px;">
+          <label class="kf-label">Contenu (Markdown)</label>
+          <textarea id="je-body" class="kf-input" rows="6" placeholder="Détaillez ici..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="this.closest('.modal-overlay').remove()">Annuler</button>
+        <button class="btn btn-primary" onclick="Journal.saveNew(this.closest('.modal-overlay'))">Enregistrer</button>
+      </div></div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener('click', e => { if(e.target===modal) modal.remove(); });
+    setTimeout(() => document.getElementById('je-title')?.focus(), 100);
+  },
+  saveNew(modal) {
+    const type = modal.querySelector('#je-type').value;
+    const title = modal.querySelector('#je-title').value.trim();
+    const body = modal.querySelector('#je-body').value.trim();
+    if (!title) { toastWarn('Titre requis'); return; }
+    const entries = this.getAll();
+    entries.unshift({ id: Date.now(), type, title, body, ts: Date.now(), date: new Date().toLocaleDateString('fr-FR'), user: localStorage.getItem('cyrias_username') || 'Anonyme' });
+    this.save(entries);
+    modal.remove();
+    this.render();
+    toastOk('Entrée ajoutée !');
+    AuditLog.log('journal_add', title);
+  },
+  deleteEntry(id) {
+    if (!confirm('Supprimer cette entrée ?')) return;
+    const entries = this.getAll();
+    const prev = JSON.stringify(entries);
+    UndoManager.push('journal_delete', this.KEY, prev, 'Suppression entrée journal');
+    this.save(entries.filter(e => e.id !== id));
+    this.render();
+    toastOk('Entrée supprimée');
+  },
+  render() {
+    const container = document.getElementById('journal-entries');
+    if (!container) return;
+    const search = (document.getElementById('journal-search')?.value || '').toLowerCase();
+    const filter = document.getElementById('journal-filter')?.value || 'all';
+    let entries = this.getAll();
+    if (filter !== 'all') entries = entries.filter(e => e.type === filter);
+    if (search) entries = entries.filter(e => (e.title + ' ' + e.body).toLowerCase().includes(search));
+    
+    const typeStyles = { standup: { icon: '🟢', color: 'var(--ok)' }, blocage: { icon: '🔴', color: 'var(--danger)' }, decision: { icon: '🟡', color: 'var(--warn)' }, note: { icon: '📝', color: 'var(--info)' }};
+    
+    container.innerHTML = entries.length ? entries.map(e => {
+      const s = typeStyles[e.type] || typeStyles.note;
+      return `<div class="tool-card" style="padding:16px;border-left:4px solid ${s.color};">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div><span style="font-size:11px;text-transform:uppercase;color:${s.color};font-weight:600;">${s.icon} ${e.type}</span>
+            <h3 style="font-size:15px;margin:4px 0 6px;">${escapeHtml(e.title)}</h3>
+          </div>
+          <div style="display:flex;gap:6px;align-items:center;">
+            <span style="font-size:11px;color:var(--ink-muted);">${e.date} · ${e.user||''}</span>
+            <button onclick="Journal.deleteEntry(${e.id})" style="background:none;border:none;cursor:pointer;color:var(--ink-muted);font-size:14px;" title="Supprimer">🗑</button>
+          </div>
+        </div>
+        ${e.body ? `<p style="font-size:13px;color:var(--ink-secondary);white-space:pre-wrap;margin:0;">${escapeHtml(e.body)}</p>` : ''}
+      </div>`;
+    }).join('') : '<div style="text-align:center;padding:40px;color:var(--ink-muted);"><div style="font-size:40px;margin-bottom:8px;">📓</div>Aucune entrée. Créez-en une !</div>';
+  },
+  async exportMd() {
+    const entries = this.getAll();
+    if (!entries.length) { toastWarn('Journal vide'); return; }
+    try {
+      if (!window.docx || !window.docx.Document) { toastWarn('Bibliothèque docx non chargée. Rechargez la page.'); return; }
+      const D = window.docx;
+      const BRAND = '1B3B5C';
+      const GREEN = '5EB091';
+      const typeColors = { standup: '22C55E', blocage: 'EF4444', decision: 'F59E0B', note: '3B82F6' };
+      const children = [
+        new D.Paragraph({ spacing: { after: 40 }, children: [new D.TextRun({ text: 'JOURNAL DE BORD', size: 36, bold: true, font: 'Arial', color: BRAND })] }),
+        new D.Paragraph({ spacing: { after: 80 }, border: { bottom: { style: D.BorderStyle.SINGLE, size: 6, color: GREEN, space: 1 }},
+          children: [new D.TextRun({ text: `Export du ${new Date().toLocaleDateString('fr-FR')} — ${entries.length} entrée(s)`, size: 20, font: 'Arial', color: '94A3B8' })] }),
+      ];
+      entries.forEach(e => {
+        const col = typeColors[e.type] || typeColors.note;
+        children.push(new D.Paragraph({ spacing: { before: 240, after: 60 }, border: { bottom: { style: D.BorderStyle.SINGLE, size: 1, color: 'E5E9EE', space: 1 }},
+          children: [
+            new D.TextRun({ text: e.type.toUpperCase() + '  ', size: 18, bold: true, font: 'Arial', color: col }),
+            new D.TextRun({ text: e.title, size: 24, bold: true, font: 'Arial', color: BRAND }),
+            new D.TextRun({ text: '   ' + e.date + (e.user ? ' · ' + e.user : ''), size: 18, font: 'Arial', color: '94A3B8' }),
+          ]}));
+        if (e.body) children.push(new D.Paragraph({ spacing: { after: 80 }, children: [new D.TextRun({ text: e.body, size: 22, font: 'Arial', color: '475569' })] }));
+      });
+      children.push(new D.Paragraph({ spacing: { before: 200 }, children: [new D.TextRun({ text: 'Généré par Cyrias Buddy v20', size: 18, font: 'Arial', italics: true, color: '94A3B8' })] }));
+      const doc = new D.Document({ styles: { default: { document: { run: { font: 'Arial', size: 22 }}}},
+        sections: [{ properties: { page: { size: { width: 11906, height: 16838 }, margin: { top: 1134, right: 1134, bottom: 1134, left: 1134 }}}, children }] });
+      const buffer = await D.Packer.toBlob(doc);
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(buffer);
+      a.download = `journal-cyrias-${new Date().toISOString().slice(0,10)}.docx`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      toastOk('Journal exporté en .docx !');
+    } catch(err) { console.error(err); toastWarn('Erreur export: ' + err.message); }
+  }
+};
+window.Journal = Journal;
+
+// ===== AUTO-NOTIFICATION ENGINE =====
+const NotifEngine = {
+  lastRun: 0,
+  run() {
+    if (Date.now() - this.lastRun < 60000) return; // max 1x/min
+    this.lastRun = Date.now();
+    const tasks = JSON.parse(localStorage.getItem('cyrias_kanban_tasks') || '[]');
+    const now = new Date();
+    // Deadlines dans 24h
+    tasks.forEach(t => {
+      if (!t.deadline || t.status === 'done' || t.status === 'Terminé') return;
+      const dl = new Date(t.deadline);
+      const diff = (dl - now) / 3600000;
+      if (diff > 0 && diff < 24) {
+        const existing = NotifCenter.getAll().find(n => n.body.includes(t.title) && n.type === 'deadline' && Date.now() - n.ts < 86400000);
+        if (!existing) NotifCenter.add('deadline', '⏰ Deadline proche', `"${t.title}" expire dans ${Math.round(diff)}h`, 'warn');
+      }
+      if (diff < 0) {
+        const existing = NotifCenter.getAll().find(n => n.body.includes(t.title) && n.type === 'overdue' && Date.now() - n.ts < 86400000);
+        if (!existing) NotifCenter.add('overdue', '🔴 Deadline dépassée', `"${t.title}" en retard de ${Math.round(-diff)}h`, 'danger');
+      }
+    });
+    // Anomalies
+    if (typeof AnomalyDetector !== 'undefined') {
+      const critical = AnomalyDetector.scan().filter(a => a.severity === 'high');
+      critical.forEach(a => {
+        const existing = NotifCenter.getAll().find(n => n.body === a.message && Date.now() - n.ts < 3600000);
+        if (!existing) NotifCenter.add('anomaly', '⚠️ Anomalie critique', a.message, 'danger');
+      });
+    }
+    NotifCenter.updateBadge();
+  }
+};
+
+// ===== SCRATCHPAD ARCHIVE =====
+const ScratchpadArchive = {
+  KEY: 'cyrias_scratchpad_archives',
+  getAll() { try { return JSON.parse(localStorage.getItem(this.KEY) || '[]'); } catch(e) { return []; } },
+  saveStore(data) { safeLocalSet(this.KEY, JSON.stringify(data)); },
+
+  switchTab(tab) {
+    const editView = document.getElementById('sp-view-edit');
+    const archView = document.getElementById('sp-view-arch');
+    const tabEdit = document.getElementById('sp-tab-edit');
+    const tabArch = document.getElementById('sp-tab-arch');
+    if (!editView || !archView) return;
+    if (tab === 'arch') {
+      editView.style.display = 'none';
+      archView.style.display = 'flex';
+      tabEdit.style.background = 'rgba(255,255,255,.08)'; tabEdit.style.color = 'rgba(255,255,255,.6)';
+      tabArch.style.background = 'rgba(255,255,255,.2)'; tabArch.style.color = '#fff';
+      this.renderArchiveList();
+    } else {
+      editView.style.display = 'flex';
+      archView.style.display = 'none';
+      tabEdit.style.background = 'rgba(255,255,255,.2)'; tabEdit.style.color = '#fff';
+      tabArch.style.background = 'rgba(255,255,255,.08)'; tabArch.style.color = 'rgba(255,255,255,.6)';
+    }
+  },
+
+  updateBadge() {
+    const el = document.getElementById('sp-arch-count');
+    if (el) el.textContent = this.getAll().length;
+  },
+
+  save() {
+    const text = document.getElementById('scratchpad-text')?.value || '';
+    if (!text.trim()) { toastWarn('Scratchpad vide, rien à sauvegarder'); return; }
+    const label = prompt('Nom de la sauvegarde (optionnel) :', new Date().toLocaleDateString('fr-FR') + ' ' + new Date().toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'}));
+    if (label === null) return;
+    const archives = this.getAll();
+    archives.unshift({ id: Date.now(), label: label || new Date().toLocaleString('fr-FR'), text, date: new Date().toISOString(), size: new Blob([text]).size });
+    if (archives.length > 50) archives.length = 50;
+    this.saveStore(archives);
+    this.updateBadge();
+    toastOk('💾 Scratchpad sauvegardé !');
+    if (typeof AuditLog !== 'undefined') AuditLog.log('scratchpad_save', label || 'sans nom');
+  },
+
+  clearCurrent() {
+    if (!confirm('Vider le contenu actuel du scratchpad ?')) return;
+    const ta = document.getElementById('scratchpad-text');
+    if (ta) { ta.value = ''; localStorage.setItem('cyrias_scratchpad', ''); }
+    toastOk('Scratchpad vidé');
+  },
+
+  restore(id) {
+    const a = this.getAll().find(x => x.id === id);
+    if (!a) return;
+    const ta = document.getElementById('scratchpad-text');
+    if (ta) {
+      if (ta.value.trim() && !confirm('Remplacer le contenu actuel ?')) return;
+      ta.value = a.text;
+      localStorage.setItem('cyrias_scratchpad', a.text);
+    }
+    this.switchTab('edit');
+    toastOk('Contenu restauré');
+  },
+
+  deleteOne(id) {
+    if (!confirm('Supprimer cette sauvegarde ?')) return;
+    this.saveStore(this.getAll().filter(x => x.id !== id));
+    this.updateBadge();
+    this.renderArchiveList();
+    toastOk('Supprimé');
+  },
+
+  deleteAll() {
+    if (!confirm('Supprimer TOUTES les sauvegardes ?')) return;
+    this.saveStore([]);
+    this.updateBadge();
+    this.renderArchiveList();
+    toastOk('Archives vidées');
+  },
+
+  renderArchiveList() {
+    const container = document.getElementById('sp-arch-list');
+    if (!container) return;
+    const archives = this.getAll();
+    if (!archives.length) {
+      container.innerHTML = '<div style="text-align:center;padding:40px 10px;color:var(--ink-muted);font-size:12px;"><div style="font-size:32px;margin-bottom:8px;">📂</div>Aucune sauvegarde.<br>Utilisez 💾 pour archiver.</div>';
+      return;
+    }
+    container.innerHTML = archives.map(a => {
+      const preview = escapeHtml((a.text || '').slice(0, 80));
+      const d = new Date(a.date);
+      const sz = a.size || new Blob([a.text]).size;
+      return `<div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin-bottom:6px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <strong style="font-size:11px;color:var(--ink);">${escapeHtml(a.label)}</strong>
+          <div style="display:flex;gap:2px;">
+            <button onclick="ScratchpadArchive.restore(${a.id})" style="background:none;border:none;cursor:pointer;font-size:12px;" title="Restaurer">↩️</button>
+            <button onclick="ScratchpadArchive.deleteOne(${a.id})" style="background:none;border:none;cursor:pointer;font-size:12px;" title="Supprimer">🗑</button>
+          </div>
+        </div>
+        <div style="font-size:10px;color:var(--ink-muted);margin-bottom:4px;">${d.toLocaleDateString('fr-FR')} ${d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})} · ${(sz/1024).toFixed(1)} Ko</div>
+        <pre style="font-size:10px;color:var(--ink-secondary);white-space:pre-wrap;word-break:break-all;margin:0;font-family:'JetBrains Mono',monospace;background:var(--bg-subtle);padding:4px 6px;border-radius:3px;max-height:40px;overflow:hidden;line-height:1.3;">${preview}${a.text.length>80?'…':''}</pre>
+      </div>`;
+    }).join('') + (archives.length > 1 ? `<button onclick="ScratchpadArchive.deleteAll()" style="width:100%;margin-top:4px;padding:6px;font-size:10px;color:var(--danger);background:var(--danger-soft);border:1px solid var(--danger-border);border-radius:6px;cursor:pointer;">🗑 Tout supprimer</button>` : '');
+  },
+
+  // Keep showList for config page button
+  showList() { 
+    const panel = document.getElementById('scratchpad-panel');
+    if (panel && !panel.classList.contains('open')) panel.classList.add('open');
+    this.switchTab('arch');
+  }
+};
+window.ScratchpadArchive = ScratchpadArchive;
+
+// Init badge on load
+window.addEventListener('load', () => { setTimeout(() => ScratchpadArchive.updateBadge(), 500); });
+
+// ===== INIT ALL v20 FEATURES =====
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    // Init notifications badge
+    NotifCenter.updateBadge();
+    NotifCenter.render();
+    
+    // Init journal
+    Journal.render();
+    
+    // Run notification engine
+    NotifEngine.run();
+    setInterval(() => NotifEngine.run(), 120000); // every 2min
+    
+    // Dashboard widgets
+    setTimeout(() => DashWidgets.renderDashboard(), 500);
+    
+    // Add v20 buttons to config page
+    const card = document.getElementById('sprintb-config-card');
+    if (card) {
+      const grid = card.querySelector('div[style*="grid-template-columns"]');
+      if (grid) {
+        // Templates button
+        if (!document.getElementById('btn-templates')) {
+          const btn = document.createElement('button');
+          btn.id = 'btn-templates';
+          btn.className = 'btn btn-outline';
+          btn.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;padding:14px 16px;text-align:left;gap:4px;';
+          btn.innerHTML = '<span style="font-weight:700;font-size:13px;">📦 Templates projet</span><span style="font-size:11px;color:var(--ink-muted);font-weight:400;">Appliquer ou créer des templates</span>';
+          btn.onclick = () => ProjectTemplates.openPicker();
+          grid.appendChild(btn);
+        }
+        // iCal export
+        if (!document.getElementById('btn-ical')) {
+          const btn2 = document.createElement('button');
+          btn2.id = 'btn-ical';
+          btn2.className = 'btn btn-outline';
+          btn2.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;padding:14px 16px;text-align:left;gap:4px;';
+          btn2.innerHTML = '<span style="font-weight:700;font-size:13px;">📅 Export iCal</span><span style="font-size:11px;color:var(--ink-muted);font-weight:400;">Exporter deadlines vers votre calendrier</span>';
+          btn2.onclick = () => ICalExport.export();
+          grid.appendChild(btn2);
+        }
+        // TV Mode
+        if (!document.getElementById('btn-tvmode')) {
+          const btn3 = document.createElement('button');
+          btn3.id = 'btn-tvmode';
+          btn3.className = 'btn btn-outline';
+          btn3.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;padding:14px 16px;text-align:left;gap:4px;';
+          btn3.innerHTML = '<span style="font-weight:700;font-size:13px;">📺 Mode TV</span><span style="font-size:11px;color:var(--ink-muted);font-weight:400;">Affichage plein écran <kbd style="font-family:monospace;background:var(--bg-subtle);padding:1px 4px;border-radius:3px;font-size:9px;">Ctrl+Shift+T</kbd></span>';
+          btn3.onclick = () => TVMode.toggle();
+          grid.appendChild(btn3);
+        }
+        // Weekly Report
+        if (!document.getElementById('btn-weeklyreport')) {
+          const btn4 = document.createElement('button');
+          btn4.id = 'btn-weeklyreport';
+          btn4.className = 'btn btn-outline';
+          btn4.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;padding:14px 16px;text-align:left;gap:4px;';
+          btn4.innerHTML = '<span style="font-weight:700;font-size:13px;">📋 Rapport hebdo</span><span style="font-size:11px;color:var(--ink-muted);font-weight:400;">Générer un résumé de la semaine</span>';
+          btn4.onclick = () => WeeklyReport.download();
+          grid.appendChild(btn4);
+        }
+        // AI Priority
+        if (!document.getElementById('btn-aipriority')) {
+          const btn5 = document.createElement('button');
+          btn5.id = 'btn-aipriority';
+          btn5.className = 'btn btn-outline';
+          btn5.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;padding:14px 16px;text-align:left;gap:4px;';
+          btn5.innerHTML = '<span style="font-weight:700;font-size:13px;">🤖 Priorités IA</span><span style="font-size:11px;color:var(--ink-muted);font-weight:400;">Suggestion d\'ordre de traitement</span>';
+          btn5.onclick = () => AIPriority.suggestOrder();
+          grid.appendChild(btn5);
+        }
+        // Kanban Share
+        if (!document.getElementById('btn-kanban-share')) {
+          const btn6 = document.createElement('button');
+          btn6.id = 'btn-kanban-share';
+          btn6.className = 'btn btn-outline';
+          btn6.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;padding:14px 16px;text-align:left;gap:4px;';
+          btn6.innerHTML = '<span style="font-weight:700;font-size:13px;">🔗 Partager Kanban</span><span style="font-size:11px;color:var(--ink-muted);font-weight:400;">Export/Import JSON du board</span>';
+          btn6.onclick = () => {
+            const choice = confirm('OK = Exporter le board\nAnnuler = Importer un board');
+            if (choice) KanbanShare.exportBoard(); else KanbanShare.importBoard();
+          };
+          grid.appendChild(btn6);
+        }
+        // Scratchpad Archives
+        if (!document.getElementById('btn-scratchpad-archives')) {
+          const btn7 = document.createElement('button');
+          btn7.id = 'btn-scratchpad-archives';
+          btn7.className = 'btn btn-outline';
+          btn7.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;padding:14px 16px;text-align:left;gap:4px;';
+          btn7.innerHTML = '<span style="font-weight:700;font-size:13px;">📂 Archives Scratchpad</span><span style="font-size:11px;color:var(--ink-muted);font-weight:400;">Gérer et purger les sauvegardes</span>';
+          btn7.onclick = () => ScratchpadArchive.showList();
+          grid.appendChild(btn7);
+        }
+      }
+    }
+  }, 2000);
 });
 
 
