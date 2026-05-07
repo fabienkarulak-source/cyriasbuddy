@@ -2036,10 +2036,11 @@ tbody tr:hover { background: var(--bg-subtle); }
           <button class="nav-item" data-tooltip="LOG Analyzor" onclick="navigateTo('loganalyzer')"><span class="nav-icon" data-icon="filetext" data-icon-size="16"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg></span> LOG Analyzor</button>
           <button class="nav-item" data-tooltip="Ivalua Context" onclick="navigateTo('xml-viewer')"><span class="nav-icon" data-icon="code" data-icon-size="16"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span> Ivalua Context</button>
           <button class="nav-item" data-tooltip="TMA formator" onclick="navigateTo('bible')"><span class="nav-icon" data-icon="book" data-icon-size="16"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span> TMA formator</button>
+          <button class="nav-item" data-tooltip="Analytics & Vélocité" onclick="navigateTo('analytics')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.997.398-.997.95v8a1 1 0 0 0 1 1h8Z"/><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/></svg></span> Analytics</button>
+          <button class="nav-item" data-tooltip="Error Tracker" onclick="navigateTo('errortracker')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span> Error Tracker</button>
+          <button class="nav-item" data-tooltip="Git & CI/CD" onclick="navigateTo('gitcicd')"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg></span> Git & CI/CD</button>
         </div>
       </div>
-
-      <!-- Configuration tout en bas -->
       <div class="nav-footer">
         <button class="nav-item" data-tooltip="Configuration" onclick="navigateTo('config')"><span class="nav-icon" data-icon="settings" data-icon-size="16"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span> Configuration</button>
       </div>
@@ -8604,6 +8605,74 @@ navigateTo = function(page) {
     <div id="sp-arch-list"></div>
   </div>
 </div>
+<!-- ===== v22 NEW PAGES ===== -->
+<div class="page" id="page-analytics">
+  <div class="page-header"><div><h1>📊 Analytics & Vélocité</h1><p>Statistiques de productivité, burndown et suivi du temps par tâche</p></div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-outline" onclick="Analytics.exportReport()">📥 Rapport DOCX</button>
+      <button class="btn btn-outline" onclick="Analytics.refresh()">🔄 Actualiser</button>
+    </div>
+  </div>
+  <div class="tools-container" style="max-width:1200px;">
+    <div id="analytics-kpis" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:20px;"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+      <div class="tool-card" style="padding:16px;"><h3 style="font-size:13px;font-weight:700;color:var(--primary);margin-bottom:12px;">📈 Vélocité (tâches/semaine)</h3><canvas id="chart-velocity" height="200"></canvas></div>
+      <div class="tool-card" style="padding:16px;"><h3 style="font-size:13px;font-weight:700;color:var(--primary);margin-bottom:12px;">🍩 Répartition par statut</h3><canvas id="chart-status-pie" height="200"></canvas></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+      <div class="tool-card" style="padding:16px;"><h3 style="font-size:13px;font-weight:700;color:var(--primary);margin-bottom:12px;">⏱ Temps moyen par type</h3><canvas id="chart-avg-time" height="200"></canvas></div>
+      <div class="tool-card" style="padding:16px;"><h3 style="font-size:13px;font-weight:700;color:var(--primary);margin-bottom:12px;">🔥 Burndown</h3><canvas id="chart-burndown-full" height="200"></canvas></div>
+    </div>
+    <div class="tool-card" style="padding:16px;"><h3 style="font-size:13px;font-weight:700;color:var(--primary);margin-bottom:12px;">📋 Historique des Pomodoros</h3><div id="analytics-pomo-log" style="max-height:300px;overflow-y:auto;"></div></div>
+  </div>
+</div>
+
+<div class="page" id="page-errortracker">
+  <div class="page-header"><div><h1>🐛 Error Tracker</h1><p>Suivi centralisé des erreurs, bugs et exceptions</p></div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-outline" onclick="ErrorTracker.clear()">🗑 Vider</button>
+      <button class="btn btn-primary" onclick="ErrorTracker.addManual()">+ Signaler un bug</button>
+    </div>
+  </div>
+  <div class="tools-container" style="max-width:1100px;">
+    <div style="display:flex;gap:10px;margin-bottom:16px;">
+      <input type="text" id="et-search" placeholder="Rechercher erreur..." oninput="ErrorTracker.render()" style="flex:1;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;background:var(--surface);color:var(--ink);">
+      <select id="et-severity" onchange="ErrorTracker.render()" style="padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--surface);color:var(--ink);">
+        <option value="">Toutes sévérités</option><option value="critical">🔴 Critique</option><option value="error">🟠 Erreur</option><option value="warning">🟡 Warning</option><option value="info">🔵 Info</option>
+      </select>
+      <select id="et-status" onchange="ErrorTracker.render()" style="padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--surface);color:var(--ink);">
+        <option value="">Tous statuts</option><option value="open">Ouvert</option><option value="investigating">En cours</option><option value="resolved">Résolu</option>
+      </select>
+    </div>
+    <div id="et-stats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;"></div>
+    <div id="et-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+</div>
+
+<div class="page" id="page-gitcicd">
+  <div class="page-header"><div><h1>🔀 Git & CI/CD</h1><p>Pull Requests, commits et état des déploiements</p></div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-outline" onclick="GitCICD.openSettings()">⚙️ Config repo</button>
+      <button class="btn btn-primary" onclick="GitCICD.addEntry()">+ Ajouter</button>
+    </div>
+  </div>
+  <div class="tools-container" style="max-width:1100px;">
+    <div id="git-repo-info" style="margin-bottom:16px;"></div>
+    <div style="display:flex;gap:10px;margin-bottom:16px;">
+      <select id="git-filter-type" onchange="GitCICD.render()" style="padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--surface);color:var(--ink);">
+        <option value="">Tout</option><option value="commit">Commits</option><option value="pr">Pull Requests</option><option value="deploy">Déploiements</option><option value="pipeline">Pipelines</option>
+      </select>
+      <select id="git-filter-status" onchange="GitCICD.render()" style="padding:10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--surface);color:var(--ink);">
+        <option value="">Tous statuts</option><option value="success">✅ Succès</option><option value="pending">🟡 En cours</option><option value="failed">🔴 Échec</option>
+      </select>
+      <input type="text" id="git-search" placeholder="Rechercher..." oninput="GitCICD.render()" style="flex:1;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;background:var(--surface);color:var(--ink);">
+    </div>
+    <div id="git-stats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;"></div>
+    <div id="git-timeline" style="display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+</div>
+<!-- ===== /v22 NEW PAGES ===== -->
+
 <!-- ===== v20 NEW PAGES ===== -->
 <div class="page" id="page-journal">
   <div class="page-header"><div><h1>📓 Journal de bord</h1><p>Notes quotidiennes, standup, blocages & décisions</p></div>
@@ -8745,12 +8814,41 @@ document.addEventListener('DOMContentLoaded', () => {
     if(fileIn) fileIn.addEventListener('change', e => { if (e.target.files[0]) agHandleFile(e.target.files[0]); });
 });
 
+// Formate une valeur de cellule pour l'export : décimales avec virgule, dates en FR
+function agFormatCellFR(val) {
+  if (val === null || val === undefined || val === '') return '';
+  // Date JS (cellDates:true peut retourner des objets Date)
+  if (val instanceof Date) {
+    const d = String(val.getDate()).padStart(2,'0');
+    const m = String(val.getMonth()+1).padStart(2,'0');
+    const y = val.getFullYear();
+    return `${d}/${m}/${y}`;
+  }
+  // Chaîne ressemblant à une date ISO (YYYY-MM-DD ou DD/MM/YYYY déjà formatée)
+  if (typeof val === 'string') {
+    const isoMatch = val.match(/^(\d{4})-(\d{2})-(\d{2})(?:T.*)?$/);
+    if (isoMatch) return `${isoMatch[3]}/${isoMatch[2]}/${isoMatch[1]}`;
+    // Nombre avec point décimal (ex: "0.5", "1.25")
+    const numDot = val.match(/^-?\d+\.\d+$/);
+    if (numDot) return val.replace('.', ',');
+    return val;
+  }
+  // Nombre JS
+  if (typeof val === 'number') {
+    // Vérifie si c'est un serial de date Excel (> 1 et entier ou fraction)
+    // On laisse les nombres tels quels mais avec virgule décimale
+    return String(val).replace('.', ',');
+  }
+  return String(val);
+}
+
 function agHandleFile(file) {
   const reader = new FileReader();
   reader.onload = e => {
     const data = new Uint8Array(e.target.result);
     const wb = XLSX.read(data, { type: 'array', cellDates: true });
     const ws = wb.Sheets[wb.SheetNames[0]];
+    // raw:false + dateNF pour que SheetJS formatte les dates en DD/MM/YYYY dès la lecture
     const rows = XLSX.utils.sheet_to_json(ws, { defval: '', raw: false, dateNF: 'DD/MM/YYYY' });
     
     if (!rows.length) return;
@@ -8829,7 +8927,9 @@ async function agExportAll() {
     
     try {
       const rows = agClientGroups[name].map(r => {
-        let o = {}; cols.forEach(c => o[c] = r[c]); return o;
+        let o = {};
+        cols.forEach(c => { o[c] = agFormatCellFR(r[c]); });
+        return o;
       });
       const ws = XLSX.utils.json_to_sheet(rows, { header: cols });
       const wb = XLSX.utils.book_new();
@@ -16652,7 +16752,10 @@ const DashWidgets = {
     shortcuts: { label: '⌨️ Raccourcis', render: () => '<div style="font-size:12px;line-height:2;color:var(--ink-secondary);"><kbd style="background:var(--bg-subtle);padding:2px 6px;border-radius:3px;font-family:monospace;font-size:11px;">Ctrl+K</kbd> Recherche &nbsp; <kbd style="background:var(--bg-subtle);padding:2px 6px;border-radius:3px;font-family:monospace;font-size:11px;">Ctrl+N</kbd> Nouvelle tâche &nbsp; <kbd style="background:var(--bg-subtle);padding:2px 6px;border-radius:3px;font-family:monospace;font-size:11px;">Ctrl+Shift+P</kbd> Pomodoro &nbsp; <kbd style="background:var(--bg-subtle);padding:2px 6px;border-radius:3px;font-family:monospace;font-size:11px;">Ctrl+J</kbd> Journal</div>' },
     recent_journal: { label: '📓 Journal récent', render: () => { const e = Journal.getAll().slice(0,3); return e.length ? e.map(x=>`<div style="font-size:12px;padding:4px 0;border-bottom:1px solid var(--border-subtle);"><span style="color:var(--ink-muted);">${x.date}</span> <strong>${escapeHtml(x.title||'Sans titre')}</strong></div>`).join('') : '<em style="font-size:12px;color:var(--ink-muted);">Aucune entrée</em>'; }},
     burndown: { label: '📈 Burndown', render: () => { return '<canvas id="widget-burndown" width="300" height="150"></canvas><script>setTimeout(()=>{Burndown.renderMini()},100)<\/script>'; }},
-    weekly_report: { label: '📋 Rapport hebdo', render: () => { return WeeklyReport.getMiniSummary(); }}
+    weekly_report: { label: '📋 Rapport hebdo', render: () => { return WeeklyReport.getMiniSummary(); }},
+    error_summary: { label: '🐛 Bugs ouverts', render: () => { const e = ErrorTracker.getAll(); const open = e.filter(x=>x.status==='open').length; const crit = e.filter(x=>x.severity==='critical'&&x.status!=='resolved').length; return `<div style="font-size:12px;">${crit?`<span style="color:var(--danger);font-weight:700;">${crit} critique(s)</span> · `:''}${open} ouvert(s) · ${e.length} total<br><button class="btn btn-outline" style="font-size:11px;margin-top:6px;" onclick="navigateTo('errortracker')">Voir les bugs</button></div>`; }},
+    git_activity: { label: '🔀 Activité Git', render: () => { const g = GitCICD.getAll().slice(0,3); return g.length ? g.map(e=>`<div style="font-size:11px;padding:3px 0;border-bottom:1px solid var(--border-subtle);">${{commit:'💾',pr:'🔀',deploy:'🚀',pipeline:'⚙️'}[e.type]||'📄'} ${escapeHtml(e.title.slice(0,50))} <span style="color:var(--ink-muted);">${new Date(e.createdAt).toLocaleDateString('fr-FR')}</span></div>`).join('') : '<em style="font-size:11px;color:var(--ink-muted);">Aucune activité</em>'; }},
+    time_tracked: { label: '⏱ Temps suivi', render: () => { const t = TimeTracker.getAll(); const total = Object.values(t).reduce((s,x)=>s+(x.totalSecs||0),0); const top = Object.entries(t).sort((a,b)=>b[1].totalSecs-a[1].totalSecs).slice(0,3); return `<div style="font-size:12px;font-weight:700;">${TimeTracker.formatTime(total)}</div>${top.map(([k,v])=>`<div style="font-size:11px;color:var(--ink-secondary);padding:2px 0;">${escapeHtml(v.title||k).slice(0,30)}: ${TimeTracker.formatTime(v.totalSecs)}</div>`).join('')}`; }}
   },
   renderDashboard() {
     const home = document.getElementById('home-grid');
@@ -17542,7 +17645,489 @@ window.ScratchpadArchive = ScratchpadArchive;
 // Init badge on load
 window.addEventListener('load', () => { setTimeout(() => ScratchpadArchive.updateBadge(), 500); });
 
-// ===== INIT ALL v20 FEATURES =====
+/* ============================================================================
+   v22 — 5 NOUVELLES FEATURES (Analytics, TimeTracker, ErrorTracker, GitCICD, Reports)
+   ============================================================================ */
+
+// ===== MODULE 1: Time Tracker sur cartes Kanban + Analytics =====
+const TimeTracker = {
+  KEY: 'cyrias_time_tracks',
+  getAll() { try { return JSON.parse(localStorage.getItem(this.KEY) || '{}'); } catch(e) { return {}; }},
+  save(d) { safeLocalSet(this.KEY, JSON.stringify(d)); },
+  active: null, // { taskId, startTs }
+  
+  start(taskId, taskTitle) {
+    if (this.active) this.stop();
+    this.active = { taskId, taskTitle, startTs: Date.now() };
+    safeLocalSet('cyrias_tt_active', JSON.stringify(this.active));
+    Pomodoro.start(taskTitle);
+    toastOk(`⏱ Timer démarré : ${taskTitle || taskId}`);
+  },
+  stop() {
+    if (!this.active) return null;
+    const elapsed = Math.round((Date.now() - this.active.startTs) / 1000);
+    const data = this.getAll();
+    const key = this.active.taskId;
+    if (!data[key]) data[key] = { title: this.active.taskTitle, sessions: [], totalSecs: 0 };
+    data[key].sessions.push({ start: this.active.startTs, end: Date.now(), secs: elapsed, date: new Date().toISOString() });
+    data[key].totalSecs += elapsed;
+    this.save(data);
+    const result = { taskId: key, elapsed };
+    this.active = null;
+    localStorage.removeItem('cyrias_tt_active');
+    toastOk(`⏹ Timer arrêté : ${this.formatTime(elapsed)}`);
+    return result;
+  },
+  getForTask(taskId) { return this.getAll()[taskId] || null; },
+  formatTime(secs) {
+    if (secs < 60) return secs + 's';
+    if (secs < 3600) return Math.floor(secs/60) + 'min ' + (secs%60) + 's';
+    return Math.floor(secs/3600) + 'h ' + Math.floor((secs%3600)/60) + 'min';
+  },
+  init() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('cyrias_tt_active') || 'null');
+      if (saved && saved.startTs) this.active = saved;
+    } catch(e) {}
+  }
+};
+window.TimeTracker = TimeTracker;
+TimeTracker.init();
+
+// ===== MODULE 2: Analytics & Vélocité =====
+const Analytics = {
+  charts: {},
+  refresh() {
+    this.renderKPIs();
+    this.renderVelocity();
+    this.renderStatusPie();
+    this.renderAvgTime();
+    this.renderBurndown();
+    this.renderPomoLog();
+  },
+  getKanbanTasks() {
+    try { return JSON.parse(localStorage.getItem('cyrias_kanban_tasks') || '[]'); } catch(e) { return []; }
+  },
+  renderKPIs() {
+    const el = document.getElementById('analytics-kpis');
+    if (!el) return;
+    const tasks = this.getKanbanTasks();
+    const done = tasks.filter(t => t.status === 'done' || t.status === 'Terminé');
+    const wip = tasks.filter(t => t.status === 'in-progress' || t.status === 'En cours');
+    const tracks = TimeTracker.getAll();
+    const totalTracked = Object.values(tracks).reduce((s,t) => s + (t.totalSecs||0), 0);
+    const pomos = typeof Pomodoro !== 'undefined' ? Pomodoro.state.completedToday : 0;
+    const anomalies = typeof AnomalyDetector !== 'undefined' ? AnomalyDetector.scan().filter(a=>a.severity!=='info').length : 0;
+    const errors = ErrorTracker.getAll().filter(e=>e.status==='open').length;
+    const kpis = [
+      ['📋 Total tâches', tasks.length, 'var(--brand)'],
+      ['✅ Terminées', done.length, 'var(--ok)'],
+      ['🔄 En cours', wip.length, 'var(--info)'],
+      ['⏱ Temps suivi', TimeTracker.formatTime(totalTracked), 'var(--secondary)'],
+      ['🍅 Pomodoros', pomos, '#E11D48'],
+      ['⚠️ Anomalies', anomalies, 'var(--warn)'],
+      ['🐛 Bugs ouverts', errors, 'var(--danger)'],
+    ];
+    el.innerHTML = kpis.map(([l,v,c]) => `<div style="background:var(--surface);padding:14px;border-radius:8px;border:1px solid var(--border);"><div style="font-size:22px;font-weight:700;color:${c};">${v}</div><div style="font-size:11px;color:var(--ink-muted);margin-top:2px;">${l}</div></div>`).join('');
+  },
+  renderVelocity() {
+    const canvas = document.getElementById('chart-velocity');
+    if (!canvas) return;
+    const tasks = this.getKanbanTasks().filter(t => t.status === 'done' || t.status === 'Terminé');
+    const byWeek = {};
+    tasks.forEach(t => {
+      const d = new Date(t.completedAt || t.created || Date.now());
+      const week = this._weekKey(d);
+      byWeek[week] = (byWeek[week] || 0) + 1;
+    });
+    const weeks = Object.keys(byWeek).sort().slice(-8);
+    const data = weeks.map(w => byWeek[w] || 0);
+    if (this.charts.velocity) this.charts.velocity.destroy();
+    this.charts.velocity = new Chart(canvas, {
+      type: 'bar', data: { labels: weeks, datasets: [{ label: 'Tâches terminées', data, backgroundColor: 'rgba(94,176,145,0.7)', borderColor: '#5EB091', borderWidth: 1, borderRadius: 4 }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }}, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 }}}}
+    });
+  },
+  renderStatusPie() {
+    const canvas = document.getElementById('chart-status-pie');
+    if (!canvas) return;
+    const tasks = this.getKanbanTasks();
+    const counts = {};
+    tasks.forEach(t => { const s = t.status || 'backlog'; counts[s] = (counts[s]||0)+1; });
+    const labels = Object.keys(counts);
+    const data = Object.values(counts);
+    const colors = ['#94a3b8','#3B82F6','#F59E0B','#5EB091','#1B3B5C','#E11D48','#8B5CF6'];
+    if (this.charts.pie) this.charts.pie.destroy();
+    this.charts.pie = new Chart(canvas, {
+      type: 'doughnut', data: { labels, datasets: [{ data, backgroundColor: colors.slice(0, labels.length), borderWidth: 2, borderColor: '#fff' }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { size: 11 }}}}}
+    });
+  },
+  renderAvgTime() {
+    const canvas = document.getElementById('chart-avg-time');
+    if (!canvas) return;
+    const tracks = TimeTracker.getAll();
+    const tasks = this.getKanbanTasks();
+    const byPrio = {};
+    Object.entries(tracks).forEach(([id, t]) => {
+      const task = tasks.find(k => k.id === id);
+      const prio = task?.priority || 'medium';
+      if (!byPrio[prio]) byPrio[prio] = { total: 0, count: 0 };
+      byPrio[prio].total += t.totalSecs;
+      byPrio[prio].count++;
+    });
+    const labels = Object.keys(byPrio);
+    const data = labels.map(k => Math.round(byPrio[k].total / byPrio[k].count / 60));
+    if (this.charts.avgTime) this.charts.avgTime.destroy();
+    this.charts.avgTime = new Chart(canvas, {
+      type: 'bar', data: { labels, datasets: [{ label: 'Temps moyen (min)', data, backgroundColor: 'rgba(59,130,246,0.6)', borderRadius: 4 }] },
+      options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false }}}
+    });
+  },
+  renderBurndown() {
+    const canvas = document.getElementById('chart-burndown-full');
+    if (!canvas) return;
+    const tasks = this.getKanbanTasks();
+    const byDate = {}, doneByDate = {};
+    tasks.forEach(t => {
+      const d = (t.created || new Date().toISOString()).slice(0,10);
+      byDate[d] = (byDate[d]||0)+1;
+      if (t.status === 'done' || t.status === 'Terminé') doneByDate[d] = (doneByDate[d]||0)+1;
+    });
+    const dates = Object.keys({...byDate,...doneByDate}).sort();
+    let cumT = 0, cumD = 0;
+    const totalData = [], doneData = [];
+    dates.forEach(d => { cumT += byDate[d]||0; cumD += doneByDate[d]||0; totalData.push(cumT); doneData.push(cumD); });
+    if (this.charts.burndown) this.charts.burndown.destroy();
+    this.charts.burndown = new Chart(canvas, {
+      type: 'line', data: {
+        labels: dates.map(d => d.slice(5)),
+        datasets: [
+          { label: 'Total', data: totalData, borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, tension: 0.3, pointRadius: 2 },
+          { label: 'Terminées', data: doneData, borderColor: '#22C55E', backgroundColor: 'rgba(34,197,94,0.1)', fill: true, tension: 0.3, pointRadius: 2 }
+        ]
+      }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { font: { size: 10 }}}}, scales: { y: { beginAtZero: true }}}
+    });
+  },
+  renderPomoLog() {
+    const el = document.getElementById('analytics-pomo-log');
+    if (!el) return;
+    const logs = typeof AuditLog !== 'undefined' ? AuditLog.getAll().filter(l => l.action === 'pomodoro_completed') : [];
+    if (!logs.length) { el.innerHTML = '<div style="text-align:center;padding:20px;color:var(--ink-muted);font-size:12px;">Aucun pomodoro enregistré. Utilisez le timer Pomodoro pour commencer.</div>'; return; }
+    el.innerHTML = logs.slice(0,30).map(l => `<div style="display:flex;justify-content:space-between;padding:8px 10px;border-bottom:1px solid var(--border-subtle);font-size:12px;"><span style="color:var(--ink);">🍅 ${escapeHtml(l.detail||'')}</span><span style="color:var(--ink-muted);">${new Date(l.ts).toLocaleString('fr-FR')}</span></div>`).join('');
+  },
+  async exportReport() {
+    if (!window.docx || !window.docx.Document) { toastWarn('Bibliothèque docx non chargée'); return; }
+    try {
+      const D = window.docx;
+      const tasks = this.getKanbanTasks();
+      const done = tasks.filter(t => t.status === 'done' || t.status === 'Terminé');
+      const tracks = TimeTracker.getAll();
+      const totalTracked = Object.values(tracks).reduce((s,t) => s + (t.totalSecs||0), 0);
+      const doc = new D.Document({ sections: [{ children: [
+        new D.Paragraph({ children: [new D.TextRun({ text: 'RAPPORT ANALYTICS — Cyrias Buddy', size: 32, bold: true, font: 'Arial', color: '1B3B5C' })]}),
+        new D.Paragraph({ spacing: { after: 200 }, children: [new D.TextRun({ text: `Généré le ${new Date().toLocaleString('fr-FR')}`, size: 20, font: 'Arial', color: '94A3B8' })]}),
+        new D.Paragraph({ children: [new D.TextRun({ text: `Total tâches : ${tasks.length} | Terminées : ${done.length} | Temps suivi : ${TimeTracker.formatTime(totalTracked)}`, size: 22, font: 'Arial' })]}),
+      ]}]});
+      const buffer = await D.Packer.toBlob(doc);
+      const a = document.createElement('a'); a.href = URL.createObjectURL(buffer); a.download = `analytics-${new Date().toISOString().slice(0,10)}.docx`; a.click();
+      toastOk('Rapport exporté');
+    } catch(e) { toastWarn('Erreur: ' + e.message); }
+  },
+  _weekKey(d) { const s = new Date(d); s.setDate(s.getDate() - s.getDay() + 1); return 'S' + String(Math.ceil((s - new Date(s.getFullYear(),0,1))/604800000)).padStart(2,'0'); }
+};
+window.Analytics = Analytics;
+
+// ===== MODULE 3: Error Tracker =====
+const ErrorTracker = {
+  KEY: 'cyrias_error_tracker',
+  getAll() { try { return JSON.parse(localStorage.getItem(this.KEY) || '[]'); } catch(e) { return []; }},
+  save(d) { safeLocalSet(this.KEY, JSON.stringify(d)); },
+  
+  add(severity, message, source, stack, linkedTask) {
+    const errors = this.getAll();
+    errors.unshift({ id: 'err_'+Date.now(), severity, message, source: source||'', stack: stack||'', linkedTask: linkedTask||'', status: 'open', createdAt: new Date().toISOString(), resolvedAt: null });
+    if (errors.length > 500) errors.length = 500;
+    this.save(errors);
+    this.render();
+    NotifCenter.add('error', `🐛 ${severity}: ${message.slice(0,80)}`, source || 'Application', severity === 'critical' ? 'danger' : 'warn');
+  },
+  addManual() {
+    const tasks = Analytics.getKanbanTasks();
+    const taskOpts = tasks.map(t => `<option value="${t.id}">${escapeHtml(t.title||t.id)}</option>`).join('');
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay active';
+    modal.innerHTML = `<div class="modal" style="max-width:500px;">
+      <div class="modal-header"><h3>🐛 Signaler un bug</h3></div>
+      <div class="modal-body" style="display:flex;flex-direction:column;gap:12px;">
+        <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;">Sévérité</label>
+          <select id="err-sev" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:12px;background:var(--surface);"><option value="error">🟠 Erreur</option><option value="critical">🔴 Critique</option><option value="warning">🟡 Warning</option><option value="info">🔵 Info</option></select></div>
+        <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;">Message</label>
+          <input type="text" id="err-msg" placeholder="Description du bug..." style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:12px;box-sizing:border-box;"></div>
+        <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;">Source / Module</label>
+          <input type="text" id="err-src" placeholder="Ex: Facturator, Kanban..." style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:12px;box-sizing:border-box;"></div>
+        <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;">Stack trace (optionnel)</label>
+          <textarea id="err-stack" rows="3" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:11px;font-family:'JetBrains Mono',monospace;resize:vertical;box-sizing:border-box;"></textarea></div>
+        <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;">Lier à une tâche Kanban</label>
+          <select id="err-task" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:12px;background:var(--surface);"><option value="">— Aucune —</option>${taskOpts}</select></div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-outline" onclick="this.closest('.modal-overlay').remove()">Annuler</button><button class="btn btn-primary" onclick="ErrorTracker.saveManual(this.closest('.modal-overlay'))">💾 Enregistrer</button></div></div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener('click', e => { if(e.target===modal) modal.remove(); });
+  },
+  saveManual(modal) {
+    const sev = modal.querySelector('#err-sev').value;
+    const msg = modal.querySelector('#err-msg').value.trim();
+    if (!msg) { toastWarn('Message requis'); return; }
+    this.add(sev, msg, modal.querySelector('#err-src').value.trim(), modal.querySelector('#err-stack').value.trim(), modal.querySelector('#err-task').value);
+    modal.remove();
+    toastOk('Bug enregistré');
+  },
+  setStatus(id, status) {
+    const errors = this.getAll();
+    const err = errors.find(e => e.id === id);
+    if (err) { err.status = status; if (status === 'resolved') err.resolvedAt = new Date().toISOString(); }
+    this.save(errors);
+    this.render();
+  },
+  deleteOne(id) {
+    if (!confirm('Supprimer cette erreur ?')) return;
+    this.save(this.getAll().filter(e => e.id !== id));
+    this.render();
+  },
+  clear() {
+    if (!confirm('Supprimer tout l\'historique des erreurs ?')) return;
+    this.save([]);
+    this.render();
+  },
+  render() {
+    const list = document.getElementById('et-list');
+    const statsEl = document.getElementById('et-stats');
+    if (!list) return;
+    const search = (document.getElementById('et-search')?.value || '').toLowerCase();
+    const sevFilter = document.getElementById('et-severity')?.value || '';
+    const statusFilter = document.getElementById('et-status')?.value || '';
+    let errors = this.getAll();
+    if (sevFilter) errors = errors.filter(e => e.severity === sevFilter);
+    if (statusFilter) errors = errors.filter(e => e.status === statusFilter);
+    if (search) errors = errors.filter(e => (e.message+' '+e.source+' '+e.stack).toLowerCase().includes(search));
+
+    // Stats
+    const all = this.getAll();
+    if (statsEl) {
+      const open = all.filter(e=>e.status==='open').length;
+      const inv = all.filter(e=>e.status==='investigating').length;
+      const res = all.filter(e=>e.status==='resolved').length;
+      const crit = all.filter(e=>e.severity==='critical'&&e.status!=='resolved').length;
+      statsEl.innerHTML = [['🔴 Critiques',crit,'var(--danger)'],['🟠 Ouverts',open,'var(--warn)'],['🔍 En cours',inv,'var(--info)'],['✅ Résolus',res,'var(--ok)']].map(([l,v,c])=>`<div style="background:var(--surface);padding:10px;border-radius:8px;border:1px solid var(--border);text-align:center;"><div style="font-size:20px;font-weight:700;color:${c};">${v}</div><div style="font-size:10px;color:var(--ink-muted);">${l}</div></div>`).join('');
+    }
+
+    const sevStyles = { critical:{icon:'🔴',border:'var(--danger)'}, error:{icon:'🟠',border:'var(--warn)'}, warning:{icon:'🟡',border:'#F59E0B'}, info:{icon:'🔵',border:'var(--info)'} };
+    const statusLabels = { open:'Ouvert', investigating:'En cours', resolved:'✅ Résolu' };
+    
+    list.innerHTML = errors.length ? errors.map(e => {
+      const sev = sevStyles[e.severity] || sevStyles.info;
+      return `<div class="tool-card" style="padding:14px;border-left:4px solid ${sev.border};">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div style="flex:1;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <span>${sev.icon}</span>
+              <strong style="font-size:13px;">${escapeHtml(e.message)}</strong>
+              <span style="font-size:10px;padding:2px 6px;border-radius:4px;background:${e.status==='resolved'?'var(--ok-soft)':'var(--bg-subtle)'};color:${e.status==='resolved'?'var(--ok)':'var(--ink-muted)'};">${statusLabels[e.status]||e.status}</span>
+            </div>
+            ${e.source ? `<div style="font-size:11px;color:var(--ink-muted);">📦 ${escapeHtml(e.source)}</div>` : ''}
+            ${e.linkedTask ? `<div style="font-size:11px;color:var(--info);margin-top:2px;">🔗 Lié à : ${escapeHtml(e.linkedTask)}</div>` : ''}
+            ${e.stack ? `<pre style="font-size:10px;background:var(--bg-subtle);padding:6px 8px;border-radius:4px;margin-top:6px;max-height:60px;overflow:hidden;font-family:'JetBrains Mono',monospace;color:var(--ink-secondary);white-space:pre-wrap;">${escapeHtml(e.stack.slice(0,200))}</pre>` : ''}
+          </div>
+          <div style="display:flex;gap:4px;flex-shrink:0;">
+            ${e.status!=='resolved'?`<button onclick="ErrorTracker.setStatus('${e.id}','investigating')" style="background:none;border:none;cursor:pointer;font-size:12px;" title="En cours">🔍</button><button onclick="ErrorTracker.setStatus('${e.id}','resolved')" style="background:none;border:none;cursor:pointer;font-size:12px;" title="Résolu">✅</button>`:''}
+            <button onclick="ErrorTracker.deleteOne('${e.id}')" style="background:none;border:none;cursor:pointer;font-size:12px;" title="Supprimer">🗑</button>
+          </div>
+        </div>
+        <div style="font-size:10px;color:var(--ink-muted);margin-top:6px;">${new Date(e.createdAt).toLocaleString('fr-FR')}${e.resolvedAt?' · résolu le '+new Date(e.resolvedAt).toLocaleString('fr-FR'):''}</div>
+      </div>`;
+    }).join('') : '<div style="text-align:center;padding:40px;color:var(--ink-muted);font-size:12px;">🎉 Aucune erreur — tout va bien !</div>';
+  }
+};
+window.ErrorTracker = ErrorTracker;
+
+// Auto-capture window.onerror
+const _origOnError = window.onerror;
+window.onerror = function(msg, url, line, col, err) {
+  try { ErrorTracker.add('error', msg, `${url}:${line}:${col}`, err?.stack || ''); } catch(e) {}
+  if (_origOnError) return _origOnError.apply(this, arguments);
+};
+window.addEventListener('unhandledrejection', e => {
+  try { ErrorTracker.add('warning', 'Unhandled Promise: ' + (e.reason?.message || String(e.reason)).slice(0,200), 'Promise', e.reason?.stack || ''); } catch(ex) {}
+});
+
+// ===== MODULE 4: Git & CI/CD Tracker =====
+const GitCICD = {
+  KEY: 'cyrias_git_entries',
+  CONF_KEY: 'cyrias_git_config',
+  getAll() { try { return JSON.parse(localStorage.getItem(this.KEY) || '[]'); } catch(e) { return []; }},
+  getConfig() { try { return JSON.parse(localStorage.getItem(this.CONF_KEY) || '{}'); } catch(e) { return {}; }},
+  save(d) { safeLocalSet(this.KEY, JSON.stringify(d)); },
+  saveConfig(c) { safeLocalSet(this.CONF_KEY, JSON.stringify(c)); },
+
+  addEntry() {
+    const tasks = Analytics.getKanbanTasks();
+    const taskOpts = tasks.map(t => `<option value="${t.id}">${escapeHtml(t.title||t.id)}</option>`).join('');
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay active';
+    modal.innerHTML = `<div class="modal" style="max-width:500px;">
+      <div class="modal-header"><h3>🔀 Ajouter une entrée Git/CI</h3></div>
+      <div class="modal-body" style="display:flex;flex-direction:column;gap:12px;">
+        <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;">Type</label>
+          <select id="git-type" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:12px;background:var(--surface);"><option value="commit">💾 Commit</option><option value="pr">🔀 Pull Request</option><option value="deploy">🚀 Déploiement</option><option value="pipeline">⚙️ Pipeline</option></select></div>
+        <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;">Titre / Message</label>
+          <input type="text" id="git-title" placeholder="fix: correction calcul TJM" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:12px;box-sizing:border-box;"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;">Branche</label>
+            <input type="text" id="git-branch" placeholder="feature/xyz" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:12px;box-sizing:border-box;"></div>
+          <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;">Statut</label>
+            <select id="git-status" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:12px;background:var(--surface);"><option value="success">✅ Succès</option><option value="pending">🟡 En cours</option><option value="failed">🔴 Échec</option></select></div>
+        </div>
+        <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;">Auteur</label>
+          <input type="text" id="git-author" value="${localStorage.getItem('cyrias_username')||''}" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:12px;box-sizing:border-box;"></div>
+        <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;">Tâche Kanban liée</label>
+          <select id="git-task" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:12px;background:var(--surface);"><option value="">— Aucune —</option>${taskOpts}</select></div>
+        <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;">URL (optionnel)</label>
+          <input type="text" id="git-url" placeholder="https://github.com/..." style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:12px;box-sizing:border-box;"></div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-outline" onclick="this.closest('.modal-overlay').remove()">Annuler</button><button class="btn btn-primary" onclick="GitCICD.saveEntry(this.closest('.modal-overlay'))">💾 Enregistrer</button></div></div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener('click', e => { if(e.target===modal) modal.remove(); });
+  },
+  saveEntry(modal) {
+    const title = modal.querySelector('#git-title').value.trim();
+    if (!title) { toastWarn('Titre requis'); return; }
+    const entries = this.getAll();
+    entries.unshift({
+      id: 'git_'+Date.now(), type: modal.querySelector('#git-type').value, title,
+      branch: modal.querySelector('#git-branch').value.trim(), status: modal.querySelector('#git-status').value,
+      author: modal.querySelector('#git-author').value.trim(), linkedTask: modal.querySelector('#git-task').value,
+      url: modal.querySelector('#git-url').value.trim(), createdAt: new Date().toISOString()
+    });
+    this.save(entries);
+    modal.remove();
+    this.render();
+    toastOk('Entrée ajoutée');
+  },
+  openSettings() {
+    const cfg = this.getConfig();
+    const repoUrl = prompt('URL du repo Git :', cfg.repoUrl || '');
+    if (repoUrl !== null) { cfg.repoUrl = repoUrl; this.saveConfig(cfg); this.render(); toastOk('Config sauvée'); }
+  },
+  deleteOne(id) {
+    if (!confirm('Supprimer ?')) return;
+    this.save(this.getAll().filter(e => e.id !== id));
+    this.render();
+  },
+  render() {
+    const timeline = document.getElementById('git-timeline');
+    const statsEl = document.getElementById('git-stats');
+    const repoInfo = document.getElementById('git-repo-info');
+    if (!timeline) return;
+
+    const cfg = this.getConfig();
+    if (repoInfo) {
+      repoInfo.innerHTML = cfg.repoUrl ? `<div class="tool-card" style="padding:10px 14px;display:flex;align-items:center;gap:10px;"><span style="font-size:18px;">📦</span><div><strong style="font-size:13px;">${escapeHtml(cfg.repoUrl)}</strong><br><span style="font-size:11px;color:var(--ink-muted);">Repository configuré</span></div></div>` : '';
+    }
+
+    const typeFilter = document.getElementById('git-filter-type')?.value || '';
+    const statusFilter = document.getElementById('git-filter-status')?.value || '';
+    const search = (document.getElementById('git-search')?.value || '').toLowerCase();
+    let entries = this.getAll();
+    if (typeFilter) entries = entries.filter(e => e.type === typeFilter);
+    if (statusFilter) entries = entries.filter(e => e.status === statusFilter);
+    if (search) entries = entries.filter(e => (e.title+' '+e.branch+' '+e.author).toLowerCase().includes(search));
+
+    const all = this.getAll();
+    if (statsEl) {
+      statsEl.innerHTML = [
+        ['💾 Commits', all.filter(e=>e.type==='commit').length, 'var(--brand)'],
+        ['🔀 PRs', all.filter(e=>e.type==='pr').length, 'var(--info)'],
+        ['🚀 Déploiements', all.filter(e=>e.type==='deploy').length, 'var(--ok)'],
+        ['🔴 Échecs', all.filter(e=>e.status==='failed').length, 'var(--danger)']
+      ].map(([l,v,c])=>`<div style="background:var(--surface);padding:10px;border-radius:8px;border:1px solid var(--border);text-align:center;"><div style="font-size:20px;font-weight:700;color:${c};">${v}</div><div style="font-size:10px;color:var(--ink-muted);">${l}</div></div>`).join('');
+    }
+
+    const typeIcons = { commit:'💾', pr:'🔀', deploy:'🚀', pipeline:'⚙️' };
+    const statusColors = { success:'var(--ok)', pending:'var(--warn)', failed:'var(--danger)' };
+    const statusIcons = { success:'✅', pending:'🟡', failed:'🔴' };
+
+    timeline.innerHTML = entries.length ? entries.map(e => `<div class="tool-card" style="padding:14px;border-left:4px solid ${statusColors[e.status]||'var(--border)'};">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-size:16px;">${typeIcons[e.type]||'📄'}</span>
+            <strong style="font-size:13px;">${escapeHtml(e.title)}</strong>
+            <span>${statusIcons[e.status]||''}</span>
+          </div>
+          <div style="display:flex;gap:12px;font-size:11px;color:var(--ink-muted);flex-wrap:wrap;">
+            ${e.branch ? `<span>🌿 ${escapeHtml(e.branch)}</span>` : ''}
+            ${e.author ? `<span>👤 ${escapeHtml(e.author)}</span>` : ''}
+            ${e.linkedTask ? `<span>🔗 ${escapeHtml(e.linkedTask)}</span>` : ''}
+            ${e.url ? `<a href="${safeUrl(e.url)}" target="_blank" rel="noopener" style="color:var(--info);">🔗 Lien</a>` : ''}
+          </div>
+        </div>
+        <div style="display:flex;gap:4px;">
+          <button onclick="GitCICD.deleteOne('${e.id}')" style="background:none;border:none;cursor:pointer;font-size:12px;">🗑</button>
+        </div>
+      </div>
+      <div style="font-size:10px;color:var(--ink-muted);margin-top:6px;">${new Date(e.createdAt).toLocaleString('fr-FR')}</div>
+    </div>`).join('') : '<div style="text-align:center;padding:40px;color:var(--ink-muted);font-size:12px;">Aucune entrée Git/CI. Utilisez "+ Ajouter" pour commencer.</div>';
+  }
+};
+window.GitCICD = GitCICD;
+
+// ===== MODULE 5: Timer intégré aux cartes Kanban =====
+// Injecte un bouton ⏱ sur chaque carte du Kanban board
+const KanbanTimer = {
+  inject() {
+    document.querySelectorAll('.kanban-card, [data-id]').forEach(card => {
+      if (card.querySelector('.kt-btn')) return;
+      const taskId = card.getAttribute('data-id');
+      if (!taskId) return;
+      const titleEl = card.querySelector('[style*="font-weight: 600"], [style*="font-weight:600"]');
+      const taskTitle = titleEl?.textContent?.trim() || taskId;
+      const track = TimeTracker.getForTask(taskId);
+      const isActive = TimeTracker.active?.taskId === taskId;
+      const btn = document.createElement('button');
+      btn.className = 'kt-btn';
+      btn.style.cssText = `background:${isActive?'var(--danger)':'var(--secondary)'};color:#fff;border:none;padding:2px 7px;border-radius:4px;font-size:10px;cursor:pointer;margin-top:6px;display:inline-flex;align-items:center;gap:3px;`;
+      btn.innerHTML = isActive ? '⏹ Stop' : `⏱ ${track ? TimeTracker.formatTime(track.totalSecs) : 'Timer'}`;
+      btn.onclick = (e) => { e.stopPropagation(); if (isActive) { TimeTracker.stop(); } else { TimeTracker.start(taskId, taskTitle); } setTimeout(() => KanbanTimer.inject(), 100); };
+      card.appendChild(btn);
+    });
+  }
+};
+window.KanbanTimer = KanbanTimer;
+
+// Hook into renderKanban to inject timers after render
+const _origRenderKanban = typeof renderKanban === 'function' ? renderKanban : null;
+if (_origRenderKanban) {
+  window.renderKanban = function() {
+    _origRenderKanban.apply(this, arguments);
+    setTimeout(() => KanbanTimer.inject(), 50);
+  };
+}
+
+// ===== INIT v22 — hook into navigateTo =====
+const _origNavigateTo_v22 = typeof navigateTo === 'function' ? navigateTo : null;
+if (_origNavigateTo_v22) {
+  const _wrappedNav = window.navigateTo;
+  window.navigateTo = function(page) {
+    _wrappedNav.apply(this, arguments);
+    if (page === 'analytics') setTimeout(() => Analytics.refresh(), 100);
+    if (page === 'errortracker') setTimeout(() => ErrorTracker.render(), 50);
+    if (page === 'gitcicd') setTimeout(() => GitCICD.render(), 50);
+    if (page === 'kanban') setTimeout(() => KanbanTimer.inject(), 200);
+  };
+}
+
+// ===== INIT ALL v22 FEATURES =====
 window.addEventListener('load', () => {
   setTimeout(() => {
     // Init notifications badge
@@ -17558,6 +18143,11 @@ window.addEventListener('load', () => {
     
     // Dashboard widgets
     setTimeout(() => DashWidgets.renderDashboard(), 500);
+    
+    // v22: Init new modules
+    ErrorTracker.render();
+    GitCICD.render();
+    setTimeout(() => KanbanTimer.inject(), 1000);
     
     // Add v20 buttons to config page
     const card = document.getElementById('sprintb-config-card');
